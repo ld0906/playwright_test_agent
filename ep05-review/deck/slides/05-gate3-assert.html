@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · 第 3 关 断言</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .gate-head { margin-bottom:24px; display:flex; align-items:baseline; gap:24px; }
+  .gate-num { font-family:var(--font-mono); font-size:80px; font-weight:700; color:var(--accent); line-height:0.9; }
+  .gate-name { font-size:48px; font-weight:700; color:var(--ink-1); }
+  .gate-tag { font-size:22px; color:var(--ink-3); margin-left:auto; padding:8px 18px; background:rgba(248,113,113,0.12); color:var(--danger); border-radius:8px; font-family:var(--font-mono); letter-spacing:0.05em; }
+
+  .danger-levels { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:24px; }
+  .level { padding:24px 26px; border-radius:12px; background:var(--bg-elev); border:1px solid rgba(148,163,184,0.08); }
+  .level.safe   { border-left:4px solid var(--success); }
+  .level.shallow { border-left:4px solid var(--accent-warm); }
+  .level.green  { border-left:4px solid var(--danger); }
+  .level .lvl { font-family:var(--font-mono); font-size:14px; letter-spacing:0.1em; margin-bottom:8px; }
+  .level.safe .lvl    { color:var(--success); }
+  .level.shallow .lvl { color:var(--accent-warm); }
+  .level.green .lvl   { color:var(--danger); }
+  .level .label { font-size:24px; font-weight:600; color:var(--ink-1); margin-bottom:14px; }
+  .level code { display:block; font-family:var(--font-mono); font-size:16px; color:var(--ink-2); background:rgba(15,23,42,0.6); padding:12px 14px; border-radius:8px; margin-bottom:12px; line-height:1.5; }
+  .level .why { font-size:17px; color:var(--ink-3); line-height:1.5; }
+
+  .killer { padding:28px 32px; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.32); border-left:4px solid var(--danger); border-radius:12px; }
+  .killer .head { display:flex; align-items:center; gap:16px; margin-bottom:14px; }
+  .killer .head .pill { font-family:var(--font-mono); font-size:14px; background:var(--danger); color:#0F172A; padding:4px 12px; border-radius:6px; font-weight:700; letter-spacing:0.1em; }
+  .killer .head .title { font-size:22px; font-weight:600; color:var(--ink-1); }
+  .killer pre { background:#0B1220; font-size:17px; padding:16px 20px; margin:0 0 14px; }
+  .killer .body { font-size:19px; color:var(--ink-2); line-height:1.55; }
+  .killer .body strong { color:var(--danger); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+
+  <div class="gate-head">
+    <span class="gate-num">03</span>
+    <span class="gate-name">断言深度</span>
+    <span class="gate-tag">最难发现 · 最危险</span>
+  </div>
+
+  <div class="danger-levels">
+    <div class="level safe">
+      <div class="lvl">🟢 SAFE</div>
+      <div class="label">业务断言</div>
+      <code>toHaveText('1')<br>toHaveCount(3)</code>
+      <div class="why">断完 UI 现象再断业务状态，<strong style="color:var(--ink-1);">真验证</strong>。</div>
+    </div>
+    <div class="level shallow">
+      <div class="lvl">🟡 SHALLOW</div>
+      <div class="label">浅断言</div>
+      <code>toBeVisible()</code>
+      <div class="why">UI 出现 <strong style="color:var(--ink-1);">≠</strong> 业务对。点了按钮但没验证数据变化。</div>
+    </div>
+    <div class="level green">
+      <div class="lvl">🔴 ALWAYS GREEN</div>
+      <div class="label">永远绿</div>
+      <code>or() / toBeTruthy()</code>
+      <div class="why">用例发现不了<strong style="color:var(--ink-1);">任何</strong> bug。</div>
+    </div>
+  </div>
+
+  <div class="killer">
+    <div class="head">
+      <span class="pill">⚠ 最危险</span>
+      <span class="title">用例名"结账成功"，但永远绿</span>
+    </div>
+    <pre><code>await expect(
+  page.<span class="cmd">getByRole</span>(<span class="s">'heading'</span>, { name: <span class="s">'下单成功'</span> })
+    .<span class="cmd">or</span>(page.<span class="cmd">locator</span>(<span class="s">'.field-error'</span>))
+).toBeVisible();</code></pre>
+    <div class="body">下单成功 heading 出现 → 通过 ✓ · 表单校验失败 <code>.field-error</code> 出现也 → 通过 ✓<br><strong>下单成功也绿，下单失败也绿，bug 根本测不出来。</strong>但它能跑，能进 CI，让你觉得"业务被保护了"。</div>
+  </div>
+
+  <div class="callout warn" style="margin-top:24px;">
+    <span class="badge">RULE</span><strong>用例名说什么，断言就只断什么。</strong>失败用例要正反都断：错误出现 ∧ 成功页未出现。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 08</div></div>
+</div>
+</body>
+</html>

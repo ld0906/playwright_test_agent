@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · Step 3</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .step-head { display:flex; align-items:center; gap:24px; margin-bottom:32px; }
+  .step-num { font-family:var(--font-mono); font-size:28px; color:var(--primary); font-weight:700; padding:10px 22px; background:rgba(37,99,235,0.14); border:1px solid rgba(37,99,235,0.4); border-radius:10px; letter-spacing:0.1em; }
+  .step-task { font-size:22px; color:var(--ink-3); }
+
+  .crit { display:inline-block; padding:6px 16px; background:var(--accent-warm); color:#0F172A; border-radius:8px; font-size:18px; font-weight:700; letter-spacing:0.04em; margin-left:16px; }
+
+  .file-card { margin-top:16px; background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .file-head { padding:16px 28px; background:#0B1220; border-bottom:1px solid var(--divider); display:flex; align-items:center; gap:14px; }
+  .file-head .pill { padding:4px 12px; background:rgba(96,165,250,0.16); color:var(--accent); font-family:var(--font-mono); font-size:14px; border-radius:6px; letter-spacing:0.05em; }
+  .file-head .path { font-family:var(--font-mono); font-size:18px; color:var(--ink-2); }
+  .file-head .meta { margin-left:auto; font-family:var(--font-mono); font-size:14px; color:var(--ink-4); }
+  pre { border:0; border-radius:0; background:transparent; font-size:24px; padding:32px 36px; }
+  pre code .k { color:#F87171; }
+  pre code .s { color:var(--success); }
+
+  .notes { margin-top:32px; display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  .note { padding:24px 28px; background:rgba(15,23,42,0.5); border-radius:10px; border-left:3px solid var(--accent); }
+  .note .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:8px; }
+  .note .body { font-size:20px; color:var(--ink-2); line-height:1.55; }
+  .note .body code { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+
+  <div class="step-head">
+    <div class="step-num">STEP 3 / 4</div>
+    <div class="step-task">配置 Playwright MCP<span class="crit">最关键一步</span></div>
+  </div>
+
+  <div class="file-card">
+    <div class="file-head">
+      <span class="pill">JSON</span>
+      <span class="path">.mcp.json</span>
+      <span class="meta">放在项目根 · 跟 demo-app / tests-agents 平级</span>
+    </div>
+    <pre><code>{
+  <span class="s">"mcpServers"</span>: {
+    <span class="s">"playwright"</span>: {
+      <span class="s">"command"</span>: <span class="s">"npx"</span>,
+      <span class="s">"args"</span>: [<span class="s">"-y"</span>, <span class="s">"@playwright/mcp@latest"</span>]
+    }
+  }
+}</code></pre>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="lbl">DETAIL · 01</div>
+      <div class="body">用 <code>npx</code>，不需提前 <code>npm install</code>。第一次启动自动下载 <code>@playwright/mcp</code>，稍慢，后面就快了。</div>
+    </div>
+    <div class="note">
+      <div class="lbl">DETAIL · 02</div>
+      <div class="body">Cursor 用户改 <code>~/.cursor/mcp.json</code>，JSON 结构完全一样。</div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 08</div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "迷你书店" [ref=e3] [cursor=pointer]:
+      - /url: /books.html
+    - navigation [ref=e4]:
+      - link "购物车 (0)" [ref=e5] [cursor=pointer]:
+        - /url: /cart.html
+      - generic [ref=e6]: 你好，alice
+      - button "退出" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - region "分类筛选" [ref=e9]:
+      - generic [ref=e10]: 分类
+      - combobox "分类" [ref=e11]:
+        - option "全部"
+        - option "工程" [selected]
+        - option "小说"
+        - option "心理"
+    - list "书籍列表" [ref=e12]:
+      - listitem [ref=e75]:
+        - link "重构：改善既有代码的设计 Martin Fowler ¥89" [ref=e76] [cursor=pointer]:
+          - /url: /book.html?id=b001
+          - generic [ref=e77]: 📘
+          - heading "重构：改善既有代码的设计" [level=3] [ref=e78]
+          - paragraph [ref=e79]: Martin Fowler
+          - paragraph [ref=e80]: ¥89
+      - listitem [ref=e81]:
+        - link "代码整洁之道 Robert C. Martin ¥79" [ref=e82] [cursor=pointer]:
+          - /url: /book.html?id=b002
+          - generic [ref=e83]: 📗
+          - heading "代码整洁之道" [level=3] [ref=e84]
+          - paragraph [ref=e85]: Robert C. Martin
+          - paragraph [ref=e86]: ¥79
+      - listitem [ref=e87]:
+        - link "设计模式：可复用面向对象软件的基础 GoF ¥99 已下架" [ref=e88] [cursor=pointer]:
+          - /url: /book.html?id=b003
+          - generic [ref=e89]: 📕
+          - heading "设计模式：可复用面向对象软件的基础" [level=3] [ref=e90]
+          - paragraph [ref=e91]: GoF
+          - paragraph [ref=e92]: ¥99
+          - paragraph [ref=e93]: 已下架
+      - listitem [ref=e94]:
+        - link "深入理解计算机系统 Randal E. Bryant ¥139" [ref=e95] [cursor=pointer]:
+          - /url: /book.html?id=b004
+          - generic [ref=e96]: 📙
+          - heading "深入理解计算机系统" [level=3] [ref=e97]
+          - paragraph [ref=e98]: Randal E. Bryant
+          - paragraph [ref=e99]: ¥139

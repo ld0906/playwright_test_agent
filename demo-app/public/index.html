@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>迷你书店</title>
+  <script>
+    const user = localStorage.getItem('user');
+    location.href = user ? '/books.html' : '/login.html';
+  </script>
+</head>
+<body></body>
+</html>

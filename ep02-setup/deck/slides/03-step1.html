@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · Step 1</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .step-head { display:flex; align-items:center; gap:24px; margin-bottom:32px; }
+  .step-num { font-family:var(--font-mono); font-size:28px; color:var(--primary); font-weight:700; padding:10px 22px; background:rgba(37,99,235,0.14); border:1px solid rgba(37,99,235,0.4); border-radius:10px; letter-spacing:0.1em; }
+  .step-task { font-size:22px; color:var(--ink-3); }
+  pre { font-size:26px; padding:36px 40px; }
+  pre code .cmt { color:var(--ink-4); }
+  pre code .cmd { color:var(--accent); }
+  pre code .arg { color:var(--ink-2); }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:32px; align-items:stretch; }
+  .panel { background:var(--bg-elev); border-radius:14px; padding:32px 36px; border:1px solid rgba(148,163,184,0.08); display:flex; flex-direction:column; gap:18px; }
+  .panel .lbl { font-family:var(--font-mono); font-size:16px; color:var(--ink-4); letter-spacing:0.1em; text-transform:uppercase; }
+  .panel ul { list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .panel ul li { display:flex; gap:14px; align-items:baseline; font-size:22px; color:var(--ink-2); line-height:1.5; }
+  .panel ul li::before { content:"✓"; color:var(--success); font-weight:700; flex-shrink:0; }
+  .panel.danger { border-color:rgba(248,113,113,0.24); }
+  .panel.danger ul li::before { content:"⚠"; color:var(--danger); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+
+  <div class="step-head">
+    <div class="step-num">STEP 1 / 4</div>
+    <div class="step-task">起 demo-app · 整门课它都不停</div>
+  </div>
+
+  <pre><code><span class="cmt"># 1. clone 课程仓库</span>
+<span class="cmd">git clone</span> <span class="arg">&lt;课程仓库&gt; playwright-test-agents-course</span>
+<span class="cmd">cd</span> <span class="arg">playwright-test-agents-course/demo-app</span>
+
+<span class="cmt"># 2. 一行启动</span>
+<span class="cmd">npm run dev</span></code></pre>
+
+  <div class="two-col">
+    <div class="panel">
+      <div class="lbl">✓ 预期</div>
+      <ul>
+        <li>终端显示 <code>Local: http://localhost:5173</code></li>
+        <li>浏览器打开能看到登录页</li>
+        <li>用 <code>alice / password</code> 登录，看到书籍列表</li>
+      </ul>
+    </div>
+    <div class="panel danger">
+      <div class="lbl">⚠ 常见踩坑</div>
+      <ul>
+        <li>端口 5173 被占：<code>lsof -i:5173</code> 找出来杀掉，或改端口</li>
+        <li>Node 版本太低：本课要求 <code>node -v</code> ≥ 20</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">03 / 08</div></div>
+</div>
+</body>
+</html>

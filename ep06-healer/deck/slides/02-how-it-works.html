@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 06 · Healer 怎么工作</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .flow { margin-top:32px; display:grid; grid-template-columns:1fr 120px 1fr 120px 1fr; gap:0; align-items:center; }
+  .node { background:var(--bg-elev); border-radius:14px; padding:32px 28px; text-align:center; border:1px solid rgba(148,163,184,0.1); }
+  .node.input { border-left:4px solid var(--danger); }
+  .node.engine { border-left:4px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+  .node.output { border-left:4px solid var(--success); background:rgba(52,211,153,0.05); }
+  .node .ttl { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:10px; }
+  .node .name { font-size:24px; font-weight:600; color:var(--ink-1); margin-bottom:8px; }
+  .node .desc { font-size:18px; color:var(--ink-3); line-height:1.5; }
+  .arrow { text-align:center; font-size:42px; color:var(--accent); font-family:var(--font-mono); }
+  .inputs { display:flex; flex-direction:column; gap:14px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 06</span><span class="sep">/</span><span>Healer Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>Healer 是干什么的</h2>
+
+  <div class="flow">
+    <div class="inputs">
+      <div class="node input"><div class="ttl">INPUT 01</div><div class="name">failed test</div><div class="desc">失败的 spec 和错误信息</div></div>
+      <div class="node input"><div class="ttl">INPUT 02</div><div class="name">current DOM</div><div class="desc">应用当前真实状态</div></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node engine">
+      <div class="ttl">ENGINE</div>
+      <div class="name">Healer Agent</div>
+      <div class="desc" style="margin-top:14px;">对比 spec locator vs 当前 DOM<br>修改 spec</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node output">
+      <div class="ttl">OUTPUT</div>
+      <div class="name">改好的 spec</div>
+      <div class="desc" style="margin-top:14px;">理想情况再跑一次<br>就绿了</div>
+    </div>
+  </div>
+
+  <div class="callout danger" style="margin-top:48px;">
+    <span class="badge">⚠ 关键认知</span><strong>Healer 不知道你的"业务意图"，只知道"怎么让红变绿"。</strong>不告诉它什么不能动，它会用最省事的方法让你绿 —— 这是危险根源。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>

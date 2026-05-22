@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 08 · PR 不跑 agent</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .reasons { margin-top:24px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .reason { background:var(--bg-elev); border-radius:14px; padding:32px 30px; border:1px solid rgba(148,163,184,0.08); border-left:4px solid var(--danger); }
+  .reason .num { font-family:var(--font-mono); font-size:14px; color:var(--danger); letter-spacing:0.1em; margin-bottom:10px; }
+  .reason .ttl { font-size:30px; font-weight:700; color:var(--ink-1); margin-bottom:14px; }
+  .reason .body { font-size:18px; color:var(--ink-2); line-height:1.55; }
+  .reason .body strong { color:var(--ink-1); }
+
+  .trigger-tbl { margin-top:32px; background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .trigger-tbl table { font-size:22px; }
+  .trigger-tbl th { padding:18px 28px; font-size:16px; color:var(--ink-3); background:rgba(15,23,42,0.6); }
+  .trigger-tbl td { padding:20px 28px; line-height:1.5; vertical-align:middle; }
+  .trigger-tbl td:first-child { color:var(--ink-1); font-weight:600; }
+  .trigger-tbl td.green { color:var(--success); font-family:var(--font-mono); }
+  .trigger-tbl td.amber { color:var(--accent-warm); font-family:var(--font-mono); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 08</span><span class="sep">/</span><span>CI 与边界</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>为什么 PR 不跑 agent</h2>
+
+  <div class="reasons">
+    <div class="reason">
+      <div class="num">REASON · 01</div>
+      <div class="ttl">慢</div>
+      <div class="body">Planner 探索一次 3-5 分钟，Generator 生成一次 5-8 分钟。每个 PR 等 10 分钟以上 —— <strong>开发同学会禁用 CI</strong>。</div>
+    </div>
+    <div class="reason">
+      <div class="num">REASON · 02</div>
+      <div class="ttl">不可重复</div>
+      <div class="body">同一个 prompt 在不同时刻 / 温度下<strong>输出不一样</strong>。CI 拿什么做 diff？</div>
+    </div>
+    <div class="reason">
+      <div class="num">REASON · 03</div>
+      <div class="ttl">会改文件</div>
+      <div class="body">Generator 写 spec / Healer 改 spec —— CI 自动改了文件触发新的 CI，<strong>无限循环</strong>。</div>
+    </div>
+  </div>
+
+  <div class="trigger-tbl">
+    <table>
+      <thead><tr><th style="width:30%">触发点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>PR</td><td class="green">→ 只跑现有 spec</td></tr>
+        <tr><td>Nightly</td><td class="green">→ 跑全量 + 基线 diff</td></tr>
+        <tr><td>开发者本地 · 手动</td><td class="amber">→ 跑 agent 走半自动 SOP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn" style="margin-top:32px;">
+    <span class="badge">CORE</span><strong>agent 是开发工具，不是 CI 工具。</strong>这一点搞错，CI 会变成测试噪音工厂。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 09</div></div>
+</div>
+</body>
+</html>

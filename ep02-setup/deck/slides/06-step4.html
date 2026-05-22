@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · Step 4</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .step-head { display:flex; align-items:center; gap:24px; margin-bottom:32px; }
+  .step-num { font-family:var(--font-mono); font-size:28px; color:var(--primary); font-weight:700; padding:10px 22px; background:rgba(37,99,235,0.14); border:1px solid rgba(37,99,235,0.4); border-radius:10px; letter-spacing:0.1em; }
+  .step-task { font-size:22px; color:var(--ink-3); }
+
+  .terminal { background:#0B1220; border:1px solid var(--divider); border-radius:12px; overflow:hidden; }
+  .term-head { padding:14px 22px; background:#0F172A; border-bottom:1px solid var(--divider); display:flex; gap:8px; align-items:center; }
+  .term-head .dot { width:10px; height:10px; border-radius:50%; }
+  .term-head .dot.r { background:#FB7185; }
+  .term-head .dot.y { background:#FBBF24; }
+  .term-head .dot.g { background:#34D399; }
+  .term-head .title { margin-left:16px; font-family:var(--font-mono); font-size:14px; color:var(--ink-3); }
+  .term-body { padding:32px 36px; font-family:var(--font-mono); font-size:22px; line-height:1.6; color:var(--ink-1); }
+  .term-body .prompt { color:var(--accent); }
+  .term-body .user { color:var(--accent-warm); }
+  .term-body .ok { color:var(--success); }
+  .term-body .ai { color:var(--ink-3); font-style:italic; }
+  .term-body .arrow { color:var(--ink-4); }
+
+  .checkpoint { margin-top:28px; padding:24px 32px; background:rgba(52,211,153,0.06); border-left:3px solid var(--success); border-radius:4px; font-size:24px; color:var(--ink-2); line-height:1.5; }
+  .checkpoint strong { color:var(--ink-1); font-weight:600; }
+  .checkpoint .badge { display:inline-block; padding:4px 12px; background:rgba(52,211,153,0.16); color:var(--success); font-family:var(--font-mono); font-size:16px; border-radius:6px; letter-spacing:0.1em; margin-right:14px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+
+  <div class="step-head">
+    <div class="step-num">STEP 4 / 4</div>
+    <div class="step-task">在 Claude Code 里验证 · 通了没</div>
+  </div>
+
+  <div class="terminal">
+    <div class="term-head">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="title">~/playwright-test-agents-course — claude</div>
+    </div>
+    <div class="term-body">
+<span class="prompt">›</span> <span class="user">/mcp</span><br>
+<span class="ok">  ✅ playwright  ·  connected</span><br>
+<br>
+<span class="prompt">›</span> <span class="user">用浏览器打开 http://localhost:5173 并截图给我</span><br>
+<span class="ai">  Claude calls <span class="arrow">→</span> browser_navigate</span><br>
+<span class="ai">  Claude calls <span class="arrow">→</span> browser_screenshot</span><br>
+<span class="ok">  📷 [登录页截图]</span>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <span class="badge">DONE</span><strong>看到 connected 加截图回来 = 环境真正通了。</strong>
+    这一刻你应该感受一下：Claude 不是给你写代码，是直接在帮你点页面。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

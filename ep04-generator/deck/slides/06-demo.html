@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 04 · 演示</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .files { margin-top:24px; display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+  .file { background:var(--bg-elev); border:1px solid rgba(148,163,184,0.1); border-radius:12px; padding:24px 20px; text-align:center; }
+  .file .name { font-family:var(--font-mono); font-size:18px; color:var(--accent); font-weight:600; margin-bottom:10px; }
+  .file .cnt { font-size:36px; font-weight:700; color:var(--ink-1); font-family:var(--font-mono); margin-bottom:8px; }
+  .file .cnt .sub { font-size:14px; color:var(--ink-3); font-weight:400; }
+  .file .desc { font-size:15px; color:var(--ink-3); line-height:1.4; }
+  .file.risks { border-left:3px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+
+  .run-result { margin-top:32px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; }
+  .stat { padding:24px 28px; background:rgba(15,23,42,0.5); border-radius:10px; text-align:center; }
+  .stat .num { font-family:var(--font-mono); font-size:42px; font-weight:700; line-height:1; }
+  .stat .label { font-size:16px; color:var(--ink-3); margin-top:8px; }
+  .stat.ok .num { color:var(--success); }
+  .stat.fail-exp .num { color:var(--accent-warm); }
+  .stat.fail-real .num { color:var(--danger); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 04</span><span class="sep">/</span><span>Generator Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>演示 · Generator 产出 5 个 spec</h2>
+
+  <div class="files">
+    <div class="file"><div class="name">auth.spec.ts</div><div class="cnt">3<span class="sub"> P0</span></div><div class="desc">登录成功 / 失败 / 未登录跳转</div></div>
+    <div class="file"><div class="name">books.spec.ts</div><div class="cnt">3<span class="sub"> 条</span></div><div class="desc">默认列表 / 分类筛选 / 下架徽章</div></div>
+    <div class="file"><div class="name">cart.spec.ts</div><div class="cnt">4<span class="sub"> 条</span></div><div class="desc">加车 / 累加 / 数量增减 / 减到 0</div></div>
+    <div class="file"><div class="name">checkout.spec.ts</div><div class="cnt">3<span class="sub"> 条</span></div><div class="desc">下单成功 / 邮箱错 / 姓名短</div></div>
+    <div class="file risks"><div class="name">risks.spec.ts</div><div class="cnt">3<span class="sub"> 条</span></div><div class="desc">含 test.fail 标记<br>RISK-02 / 03</div></div>
+  </div>
+
+  <div class="run-result">
+    <div class="stat ok"><div class="num">14</div><div class="label">passed</div></div>
+    <div class="stat fail-exp"><div class="num">2</div><div class="label">expected to fail（test.fail 标记）</div></div>
+    <div class="stat fail-real"><div class="num">0</div><div class="label">真红</div></div>
+  </div>
+
+  <div class="callout danger" style="margin-top:32px;">
+    <span class="badge">⚠</span><strong>第一次跑就 100% 全绿，反而要警惕。</strong>很可能 AI 把断言写软了（全 <code>toBeVisible()</code>），下一集 EP 05 专门审查。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

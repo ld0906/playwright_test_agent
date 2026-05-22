@@ -1,0 +1,12 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "迷你书店" [ref=e3] [cursor=pointer]:
+      - /url: /books.html
+    - navigation [ref=e4]:
+      - link "购物车 (0)" [ref=e5] [cursor=pointer]:
+        - /url: /cart.html
+      - generic [ref=e6]: 你好，alice
+      - button "退出" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - heading "结账" [level=1] [ref=e9]
+    - paragraph [ref=e11]: 购物车是空的，无法结账

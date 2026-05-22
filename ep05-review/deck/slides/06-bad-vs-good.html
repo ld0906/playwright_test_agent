@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · bad → good</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .vs { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .code-block { background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .code-block.bad { border-left:4px solid var(--danger); }
+  .code-block.good { border-left:4px solid var(--success); }
+  .code-block .head { padding:14px 22px; border-bottom:1px solid var(--divider); display:flex; align-items:center; gap:12px; }
+  .code-block.bad .head { background:rgba(248,113,113,0.06); color:var(--danger); }
+  .code-block.good .head { background:rgba(52,211,153,0.06); color:var(--success); }
+  .code-block .head .lbl { font-family:var(--font-mono); font-size:14px; letter-spacing:0.1em; }
+  .code-block .head .lines { margin-left:auto; font-family:var(--font-mono); font-size:14px; color:var(--ink-4); }
+  pre { border:0; border-radius:0; padding:20px 24px; font-size:15px; line-height:1.55; }
+  .err-marker { color:var(--danger); }
+  .ok-marker { color:var(--success); }
+
+  .issues { margin-top:32px; padding:20px 28px; background:rgba(15,23,42,0.5); border-radius:10px; }
+  .issues .head { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:10px; }
+  .issues ul { list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:8px 28px; }
+  .issues ul li { font-size:18px; color:var(--ink-2); padding-left:22px; position:relative; line-height:1.45; }
+  .issues ul li::before { content:"⚠"; position:absolute; left:0; color:var(--danger); }
+  .issues ul li .ref { color:var(--ink-4); font-family:var(--font-mono); font-size:14px; margin-left:6px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>综合 demo · bad 改 good</h2>
+
+  <div class="vs">
+    <div class="code-block bad">
+      <div class="head">
+        <span class="lbl">cart.bad.spec.ts</span>
+        <span class="lines">18 行 · 6 个问题</span>
+      </div>
+      <pre><code><span class="cmt">// 6 个偷工减料的红点</span>
+await page.goto(<span class="s">'http://localhost:5173/login.html'</span>);
+<span class="err-marker">await page.locator(<span class="s">'input[type="text"]'</span>).fill(<span class="s">'alice'</span>);</span>
+<span class="err-marker">await page.locator(<span class="s">'input[type="password"]'</span>).fill(<span class="s">'password'</span>);</span>
+<span class="err-marker">await page.locator(<span class="s">'button'</span>).click();</span>
+<span class="err-marker">await page.waitForTimeout(2000);</span>
+
+<span class="err-marker">await page.locator(<span class="s">'a.book-card'</span>).first().click();</span>
+<span class="err-marker">await page.waitForTimeout(1500);</span>
+
+await page.locator(<span class="s">'#add-to-cart'</span>).click();
+<span class="err-marker">await expect(page.locator(<span class="s">'#add-result'</span>)).toBeVisible();</span></code></pre>
+    </div>
+
+    <div class="code-block good">
+      <div class="head">
+        <span class="lbl">cart.good.spec.ts</span>
+        <span class="lines">12 行 · 短了反而更强壮</span>
+      </div>
+      <pre><code><span class="cmt">// 复用 fixture，user-facing locator</span>
+test(<span class="s">'加车后顶栏 +1 且车里真有这本书'</span>, async ({ loggedIn: page }) =&gt; {
+  await page.goto(<span class="s">'/book.html?id=b001'</span>);
+  <span class="ok-marker">await expect(page.getByRole(<span class="s">'heading'</span>, { name: <span class="s">'重构'</span> })).toBeVisible();</span>
+
+  <span class="ok-marker">await page.getByRole(<span class="s">'button'</span>, { name: <span class="s">'加入购物车'</span> }).click();</span>
+
+  <span class="cmt">// 业务状态断言</span>
+  <span class="ok-marker">await expect(page.locator(<span class="s">'#cart-count'</span>)).toHaveText(<span class="s">'1'</span>);</span>
+
+  await page.goto(<span class="s">'/cart.html'</span>);
+  <span class="ok-marker">await expect(page.locator(<span class="s">'.cart-row'</span>)).toHaveCount(1);</span>
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="issues">
+    <div class="head">BAD 版本的 6 处违规（按行号）</div>
+    <ul>
+      <li>input[type="text"] <span class="ref">L2 · 关 1</span></li>
+      <li>3 个 locator 无语义 <span class="ref">L2-4 · 关 1</span></li>
+      <li>waitForTimeout(2000) <span class="ref">L5 · 关 2</span></li>
+      <li>waitForTimeout(1500) <span class="ref">L8 · 关 2</span></li>
+      <li>.first() 隐式假设 <span class="ref">L7 · 关 1</span></li>
+      <li>只 toBeVisible 不断业务 <span class="ref">L10 · 关 3</span></li>
+    </ul>
+  </div>
+
+  <div class="callout success" style="margin-top:24px;">
+    <span class="badge">CORE</span>注意：18 行 → 12 行，<strong>短了反而更强壮</strong>。好脚本的常态。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

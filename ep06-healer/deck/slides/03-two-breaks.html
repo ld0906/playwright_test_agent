@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 06 · 两个破坏</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .breaks { margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .break { background:var(--bg-elev); border-radius:14px; padding:36px 36px; border:1px solid rgba(148,163,184,0.08); position:relative; }
+  .break.a { border-left:4px solid var(--success); }
+  .break.b { border-left:4px solid var(--danger); }
+  .break .head { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+  .break .pill { font-family:var(--font-mono); font-size:14px; padding:5px 14px; border-radius:6px; letter-spacing:0.1em; font-weight:600; }
+  .break.a .pill { background:rgba(52,211,153,0.18); color:var(--success); }
+  .break.b .pill { background:rgba(248,113,113,0.18); color:var(--danger); }
+  .break .name { font-size:30px; font-weight:700; color:var(--ink-1); }
+
+  .break .diff { background:#0B1220; border-radius:10px; padding:20px 24px; font-family:var(--font-mono); font-size:16px; line-height:1.6; margin-bottom:20px; }
+  .break .diff .minus { color:var(--danger); }
+  .break .diff .plus  { color:var(--success); }
+  .break .diff .ctx   { color:var(--ink-4); }
+
+  .break .label { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:8px; }
+  .break .scenario { font-size:19px; color:var(--ink-2); line-height:1.55; margin-bottom:14px; }
+  .break .risk { font-size:18px; color:var(--ink-3); line-height:1.55; padding-top:14px; border-top:1px dashed var(--divider); }
+  .break .risk strong { color:var(--ink-1); }
+
+  .core { margin-top:32px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 06</span><span class="sep">/</span><span>Healer Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>今天要演示的两个破坏</h2>
+
+  <div class="breaks">
+    <div class="break a">
+      <div class="head">
+        <span class="pill">🟢 LOW RISK</span>
+        <span class="name">Broken A</span>
+      </div>
+      <div class="diff">
+        <span class="ctx">button.html</span><br>
+        <span class="minus">- "加入购物车"</span><br>
+        <span class="plus">+ "立即购买"</span>
+      </div>
+      <div class="label">SCENARIO</div>
+      <div class="scenario">产品同学说转化率低，按钮文案改一下试试</div>
+      <div class="risk"><strong>风险等级低：</strong>意图明确，行为没变 —— Healer <strong style="color:var(--success);">应该自动修</strong>。</div>
+    </div>
+
+    <div class="break b">
+      <div class="head">
+        <span class="pill">🔴 HIGH RISK</span>
+        <span class="name">Broken B</span>
+      </div>
+      <div class="diff">
+        <span class="ctx">login.html</span><br>
+        <span class="minus">- input[name="username"]</span><br>
+        <span class="plus">+ input[name="userId"]</span>
+      </div>
+      <div class="label">SCENARIO</div>
+      <div class="scenario">看似 rename，但 form field name 通常映射后端 API 字段</div>
+      <div class="risk"><strong>风险等级高：</strong>如果后端没改，这本身就是 bug —— Healer <strong style="color:var(--danger);">必须停手</strong>。</div>
+    </div>
+  </div>
+
+  <div class="callout warn core">
+    <span class="badge">CORE</span>好的 Healer 应该对 A 和 B 有 <strong>不同的反应</strong> —— 这一集的全部教学落在这里。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">03 / 08</div></div>
+</div>
+</body>
+</html>

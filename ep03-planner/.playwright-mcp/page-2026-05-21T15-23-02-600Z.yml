@@ -1,0 +1,47 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "迷你书店" [ref=e3] [cursor=pointer]:
+      - /url: /books.html
+    - navigation [ref=e4]:
+      - link "购物车 (4)" [ref=e5] [cursor=pointer]:
+        - /url: /cart.html
+      - generic [ref=e6]: 你好，alice
+      - button "退出" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - heading "购物车" [level=1] [ref=e9]
+    - generic [ref=e10]:
+      - list [ref=e11]:
+        - listitem [ref=e12]:
+          - generic [ref=e13]: 📘
+          - generic [ref=e14]: 重构：改善既有代码的设计
+          - generic [ref=e15]: ¥89
+          - generic [ref=e16]:
+            - button "减少" [ref=e17] [cursor=pointer]: "-"
+            - generic [ref=e18]: "2"
+            - button "增加" [ref=e19] [cursor=pointer]: +
+          - generic [ref=e20]: ¥178
+          - button "移除" [ref=e21] [cursor=pointer]
+        - listitem [ref=e22]:
+          - generic [ref=e23]: 📕
+          - generic [ref=e24]: 设计模式：可复用面向对象软件的基础
+          - generic [ref=e25]: ¥99
+          - generic [ref=e26]:
+            - button "减少" [ref=e27] [cursor=pointer]: "-"
+            - generic [ref=e28]: "1"
+            - button "增加" [ref=e29] [cursor=pointer]: +
+          - generic [ref=e30]: ¥99
+          - button "移除" [ref=e31] [cursor=pointer]
+        - listitem [ref=e32]:
+          - generic [ref=e33]: 📙
+          - generic [ref=e34]: 深入理解计算机系统
+          - generic [ref=e35]: ¥139
+          - generic [ref=e36]:
+            - button "减少" [ref=e37] [cursor=pointer]: "-"
+            - generic [ref=e38]: "1"
+            - button "增加" [ref=e39] [cursor=pointer]: +
+          - generic [ref=e40]: ¥139
+          - button "移除" [ref=e41] [cursor=pointer]
+      - generic [ref=e42]:
+        - paragraph [ref=e43]: 合计：¥416
+        - link "去结账" [ref=e44] [cursor=pointer]:
+          - /url: /checkout.html

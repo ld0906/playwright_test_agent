@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 07 · 场景 B</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .scenario-head { padding:20px 28px; background:linear-gradient(135deg, rgba(251,191,36,0.16), rgba(251,191,36,0.04)); border:1px solid rgba(251,191,36,0.32); border-left:4px solid var(--accent-warm); border-radius:10px; margin-bottom:24px; }
+  .scenario-head .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent-warm); letter-spacing:0.1em; margin-bottom:8px; }
+  .scenario-head .title { font-size:32px; font-weight:700; color:var(--ink-1); }
+  .scenario-head .desc { font-size:18px; color:var(--ink-3); margin-top:8px; line-height:1.5; }
+
+  .flow-row { display:flex; gap:14px; align-items:stretch; }
+  .step-card { flex:1; background:var(--bg-elev); border-radius:12px; padding:22px 22px; border:1px solid rgba(148,163,184,0.08); display:flex; flex-direction:column; gap:12px; min-width:0; }
+  .step-card.skipped { opacity:0.4; background:rgba(15,23,42,0.5); border:1px dashed var(--divider); }
+  .step-card.active { border-left:4px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+  .step-card .num { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; }
+  .step-card .agent { font-size:18px; font-weight:600; color:var(--accent-warm); }
+  .step-card.skipped .agent { color:var(--ink-4); }
+  .step-card .action { font-size:16px; color:var(--ink-2); line-height:1.5; }
+  .step-card .action code { color:var(--accent); font-size:14px; }
+  .step-card.skipped .action { color:var(--ink-4); }
+  .step-arrow { display:flex; align-items:center; color:var(--accent-warm); font-size:24px; font-family:var(--font-mono); }
+
+  .key { margin-top:32px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 07</span><span class="sep">/</span><span>完整工作流</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>场景 B · 纯 UI 改版</h2>
+
+  <div class="scenario-head">
+    <div class="lbl">SCENARIO B · UI TWEAK</div>
+    <div class="title">开发同学合了一个 PR：购物车页改版</div>
+    <div class="desc">"去结账" → "去支付" · DOM 局部加 wrapper · 视觉位置调换 · <strong style="color:var(--accent-warm);">业务规则没变</strong></div>
+  </div>
+
+  <div class="flow-row">
+    <div class="step-card skipped">
+      <div class="num">STEP 01</div>
+      <div class="agent">seed.md</div>
+      <div class="action">不动 —— 业务没变</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card skipped">
+      <div class="num">STEP 02</div>
+      <div class="agent">Planner</div>
+      <div class="action">跳过</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card skipped">
+      <div class="num">STEP 03</div>
+      <div class="agent">人工 review</div>
+      <div class="action">跳过</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card skipped">
+      <div class="num">STEP 04</div>
+      <div class="agent">Generator</div>
+      <div class="action">跳过</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card active">
+      <div class="num">STEP 05</div>
+      <div class="agent">Healer 守门 prompt</div>
+      <div class="action">用 ep06 的 prompt，不用裸 prompt<br>人工 diff 看断言没动</div>
+    </div>
+  </div>
+
+  <div class="callout warn key">
+    <span class="badge">CORE</span><strong>本场景没有用到 Planner / Generator。</strong>UI 改动 ≠ 业务变化 —— 这是场景 B 的关键学习点。
+  </div>
+
+  <div class="callout info" style="margin-top:16px;">
+    <span class="badge">PROMPT</span>这一步必须用 <strong>守门 prompt</strong>。<code>[AUTO-FIX]</code> 直接修，<code>[NEEDS-HUMAN]</code> 停手 —— Healer 自己分流。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

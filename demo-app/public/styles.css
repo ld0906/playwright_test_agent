@@ -1,0 +1,56 @@
+* { box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f7f8fa; color: #1f2937; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e5e7eb; }
+.brand { font-size: 18px; font-weight: 600; color: #2563eb; text-decoration: none; }
+.topbar nav { display: flex; align-items: center; gap: 16px; }
+.topbar a { color: #1f2937; text-decoration: none; }
+.topbar button { background: transparent; border: 1px solid #d1d5db; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+
+.content { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+.auth-wrap { max-width: 400px; margin: 80px auto; padding: 0 16px; text-align: center; }
+.card { background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); text-align: left; display: flex; flex-direction: column; gap: 12px; }
+.card label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.card input, .card select { padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 14px; }
+.card button, .btn-primary { background: #2563eb; color: white; padding: 10px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block; text-align: center; }
+.card button:hover, .btn-primary:hover { background: #1d4ed8; }
+
+.error { color: #dc2626; font-size: 13px; }
+.success { color: #059669; font-size: 13px; }
+.hint { color: #6b7280; font-size: 12px; }
+.empty { color: #6b7280; text-align: center; padding: 40px; }
+
+.filters { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+
+.book-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.book-card { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; text-decoration: none; color: inherit; position: relative; }
+.book-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.cover { font-size: 48px; }
+.book-card h3 { font-size: 15px; margin: 0; line-height: 1.4; }
+.book-card .author { color: #6b7280; font-size: 13px; margin: 0; }
+.book-card .price { color: #2563eb; font-weight: 600; margin: 0; }
+.badge-discontinued { display: inline-block; background: #fef2f2; color: #dc2626; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0; }
+
+.detail { display: grid; grid-template-columns: 240px 1fr; gap: 24px; background: #fff; padding: 24px; border-radius: 8px; }
+.cover-large { font-size: 120px; text-align: center; }
+.detail h1 { margin-top: 0; }
+.detail .price { color: #2563eb; font-size: 24px; font-weight: 600; }
+.detail .stock { color: #6b7280; font-size: 13px; }
+.detail button { background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+
+.cart-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.cart-row { display: grid; grid-template-columns: 60px 1fr 80px 120px 80px 60px; align-items: center; gap: 12px; background: #fff; padding: 12px; border-radius: 8px; }
+.cover-small { font-size: 32px; text-align: center; }
+.qty { display: flex; align-items: center; gap: 8px; }
+.qty button { width: 28px; height: 28px; border: 1px solid #d1d5db; background: #fff; cursor: pointer; border-radius: 4px; }
+.qty-num { min-width: 24px; text-align: center; }
+.remove { background: transparent; border: none; color: #dc2626; cursor: pointer; }
+.cart-footer { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #fff; border-radius: 8px; }
+.total { font-size: 18px; margin: 0; }
+#grand-total { color: #2563eb; font-weight: 600; }
+
+.field-error { color: #dc2626; font-size: 12px; }
+fieldset { border: 1px solid #d1d5db; border-radius: 4px; padding: 12px; }
+fieldset legend { font-size: 14px; padding: 0 4px; }
+fieldset label { display: inline-flex; align-items: center; gap: 4px; margin-right: 16px; font-weight: normal; }

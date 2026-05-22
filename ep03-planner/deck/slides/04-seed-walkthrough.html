@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 03 · seed 节选</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .seed-wrap { margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .seed-section { background:var(--bg-elev); border-radius:14px; padding:28px 32px; border:1px solid rgba(148,163,184,0.08); }
+  .seed-section .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:12px; }
+  .seed-section h4 { font-size:24px; color:var(--ink-1); margin-bottom:14px; font-weight:600; }
+  .seed-section .body { font-size:18px; color:var(--ink-2); line-height:1.55; font-family:var(--font-mono); }
+  .seed-section .body .key { color:var(--accent); }
+  .seed-section .body .crit { color:var(--accent-warm); font-weight:600; }
+  .seed-section .why { margin-top:14px; padding-top:14px; border-top:1px dashed var(--divider); font-size:16px; color:var(--ink-3); line-height:1.55; }
+  .seed-section .why strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 03</span><span class="sep">/</span><span>Planner Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>mini-bookstore 的 seed.md（节选）</h2>
+
+  <div class="seed-wrap">
+    <div class="seed-section">
+      <div class="lbl">SECTION · 3.2 业务规则</div>
+      <h4>书籍 · 关键一句</h4>
+      <div class="body">- 库存为 0 或<span class="crit">已下架</span>的书<br>　不应能被加入购物车</div>
+      <div class="why"><strong>Why：</strong>后面 Planner 发现 bug 的关键就是这一句。<strong style="color:var(--danger);">没写「应该怎样」</strong>，AI 找不到业务核心。</div>
+    </div>
+
+    <div class="seed-section">
+      <div class="lbl">SECTION · 4 风险关注点</div>
+      <h4>4 类风险 · 按优先级</h4>
+      <div class="body">
+        1. <span class="key">越界风险</span>（最高）<br>
+        2. <span class="key">业务规则误判</span><br>
+        3. <span class="key">校验绕过</span><br>
+        4. <span class="key">状态不一致</span>
+      </div>
+      <div class="why"><strong>Why：</strong>AI 按你给的顺序<strong>分配精力</strong>。把越界放第一，未登录访问业务页会先被覆盖。</div>
+    </div>
+
+    <div class="seed-section">
+      <div class="lbl">SECTION · 5 不要测什么</div>
+      <h4>明确排除项</h4>
+      <div class="body">- 性能、并发、安全攻击<br>- 视觉细节<br>- 浏览器兼容性</div>
+      <div class="why"><strong>Why：</strong>否则 AI 会很热心地写一堆没用的性能用例。<strong>排除比包含更难写也更重要。</strong></div>
+    </div>
+
+    <div class="seed-section">
+      <div class="lbl">SECTION · 6 期望输出</div>
+      <h4>结构化字段约定</h4>
+      <div class="body">
+        - 用例：标题 + 前置 + 步骤 + 预期<br>
+        - 优先级：<span class="key">P0/P1/P2</span><br>
+        - 风险用例单独小节<br>
+        - 疑似 bug 末尾汇总
+      </div>
+      <div class="why"><strong>Why：</strong>决定 Planner 产出<strong>能不能直接用</strong>。少这段，每次跑出来格式都不一样。</div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:32px;">
+    <span class="badge">SIZE</span>整份 seed 控制在 <strong>200 行以内</strong>，足够。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

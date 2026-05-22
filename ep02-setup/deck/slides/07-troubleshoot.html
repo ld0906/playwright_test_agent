@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · 踩坑速查</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .ts-table { margin-top:24px; background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .ts-table table { font-size:22px; }
+  .ts-table th { padding:22px 28px; font-size:16px; color:var(--ink-3); background:rgba(15,23,42,0.6); border-bottom:1px solid var(--divider); }
+  .ts-table td { padding:24px 28px; vertical-align:middle; line-height:1.5; }
+  .ts-table td:first-child { color:var(--ink-1); font-weight:500; }
+  .ts-table td.cause { color:var(--ink-3); font-size:20px; }
+  .ts-table td.fix { color:var(--accent); font-family:var(--font-mono); font-size:19px; }
+
+  .row-symbol { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; font-family:var(--font-mono); font-size:18px; font-weight:700; flex-shrink:0; margin-right:12px; vertical-align:middle; }
+  .sym-1 { background:rgba(248,113,113,0.16); color:var(--danger); }
+  .sym-2 { background:rgba(251,191,36,0.16); color:var(--accent-warm); }
+  .sym-3 { background:rgba(96,165,250,0.16); color:var(--accent); }
+  .sym-4 { background:rgba(52,211,153,0.16); color:var(--success); }
+
+  .quick-hint { margin-top:32px; padding:24px 32px; background:rgba(37,99,235,0.06); border-left:3px solid var(--primary); border-radius:4px; font-size:24px; color:var(--ink-2); line-height:1.55; }
+  .quick-hint strong { color:var(--ink-1); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>常见踩坑速查</h2>
+
+  <div class="ts-table">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%">现象</th>
+          <th style="width:35%">原因</th>
+          <th style="width:35%">处理</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="row-symbol sym-1">!</span>/mcp 找不到 playwright</td>
+          <td class="cause">.mcp.json 没放在 Claude 启动目录</td>
+          <td class="fix">cd 到项目根重启 claude</td>
+        </tr>
+        <tr>
+          <td><span class="row-symbol sym-2">⚠</span>MCP 起了但截图报错</td>
+          <td class="cause">Playwright 浏览器没装</td>
+          <td class="fix">npx playwright install chromium</td>
+        </tr>
+        <tr>
+          <td><span class="row-symbol sym-3">?</span>Claude 说"没有浏览器工具"</td>
+          <td class="cause">MCP 连了但当前会话没 reload</td>
+          <td class="fix">/mcp reconnect playwright</td>
+        </tr>
+        <tr>
+          <td><span class="row-symbol sym-4">⊘</span>5173 端口被占</td>
+          <td class="cause">别的进程占用</td>
+          <td class="fix">改 demo-app package.json 端口</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quick-hint">
+    <strong>排查规则：</strong>四个症状按顺序自检，5 分钟内 99% 的问题都能定位。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">07 / 08</div></div>
+</div>
+</body>
+</html>

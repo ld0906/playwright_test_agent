@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第 1 集 · 三种方式对比</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .cmp-table {
+    margin-top: 32px;
+    background: var(--bg-elev);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.08);
+  }
+
+  .cmp-table table {
+    font-size: 24px;
+  }
+
+  .cmp-table th {
+    padding: 28px 32px;
+    font-size: 18px;
+    color: var(--ink-3);
+    background: rgba(15, 23, 42, 0.6);
+    text-align: left;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .cmp-table th:first-child {
+    color: var(--ink-4);
+  }
+
+  .cmp-table th.highlight {
+    color: var(--accent);
+    background: rgba(37, 99, 235, 0.08);
+  }
+
+  .cmp-table td {
+    padding: 26px 32px;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--divider);
+    vertical-align: middle;
+  }
+
+  .cmp-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .cmp-table td:first-child {
+    color: var(--ink-3);
+    font-size: 22px;
+  }
+
+  .cmp-table td.highlight {
+    background: rgba(37, 99, 235, 0.04);
+    color: var(--ink-1);
+    font-weight: 500;
+  }
+
+  .takeaway {
+    margin-top: 56px;
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    font-size: 26px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  .takeaway .pill {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top">
+    <span class="ep-num">EP 01</span>
+    <span class="sep">/</span>
+    <span>课程地图</span>
+  </div>
+
+  <h2 class="h-content">
+    <span class="accent-line"></span>
+    和你已经会的东西什么区别
+  </h2>
+
+  <div class="cmp-table">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>手写脚本</th>
+          <th>codegen 录制</th>
+          <th class="highlight">Test Agents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>谁来想用例</td>
+          <td>人</td>
+          <td>人</td>
+          <td class="highlight">AI</td>
+        </tr>
+        <tr>
+          <td>谁来写代码</td>
+          <td>人</td>
+          <td>工具录</td>
+          <td class="highlight">AI</td>
+        </tr>
+        <tr>
+          <td>改了 UI 怎么办</td>
+          <td>人改</td>
+          <td>重新录</td>
+          <td class="highlight">Healer 试着自愈</td>
+        </tr>
+        <tr>
+          <td>适合场景</td>
+          <td>任何</td>
+          <td>简单页面</td>
+          <td class="highlight">中等复杂 + 有 seed</td>
+        </tr>
+        <tr>
+          <td>主要风险</td>
+          <td>慢</td>
+          <td>录出来难维护</td>
+          <td class="highlight">AI 写错你不知道</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="takeaway">
+    <span class="pill">补位</span>
+    <span>Test Agents 不是替代前两种，是补一个新位 —— 它能<strong style="color: var(--ink-1);">探索 + 自愈</strong>，手写做不到。</span>
+  </div>
+
+  <div class="chrome-bottom">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>测试论道 · Playwright Test Agents 实战课</span>
+    </div>
+    <div class="page-num">03 / 07</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · 第 1 关 locator</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .gate-head { margin-bottom:32px; display:flex; align-items:baseline; gap:24px; }
+  .gate-num { font-family:var(--font-mono); font-size:80px; font-weight:700; color:var(--accent); line-height:0.9; }
+  .gate-name { font-size:48px; font-weight:700; color:var(--ink-1); }
+  .gate-tag { font-size:22px; color:var(--ink-3); margin-left:auto; padding:8px 18px; background:rgba(96,165,250,0.12); border-radius:8px; font-family:var(--font-mono); letter-spacing:0.05em; }
+
+  .vs { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .code-block { background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .code-block .head { padding:14px 24px; font-family:var(--font-mono); font-size:16px; letter-spacing:0.1em; border-bottom:1px solid var(--divider); }
+  .code-block.bad { border-left:4px solid var(--danger); }
+  .code-block.bad .head { color:var(--danger); background:rgba(248,113,113,0.06); }
+  .code-block.good { border-left:4px solid var(--success); }
+  .code-block.good .head { color:var(--success); background:rgba(52,211,153,0.06); }
+  .code-block pre { border:0; border-radius:0; padding:24px 28px; font-size:18px; line-height:1.55; }
+
+  .checks { margin-top:32px; padding:24px 32px; background:rgba(15,23,42,0.5); border-radius:12px; }
+  .checks .head { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:12px; }
+  .checks ul { list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:10px 32px; }
+  .checks ul li { font-size:18px; color:var(--ink-2); padding-left:24px; position:relative; line-height:1.5; }
+  .checks ul li::before { content:"✓"; position:absolute; left:0; color:var(--success); font-weight:700; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+
+  <div class="gate-head">
+    <span class="gate-num">01</span>
+    <span class="gate-name">locator 稳定性</span>
+    <span class="gate-tag">6 项检查</span>
+  </div>
+
+  <div class="vs">
+    <div class="code-block bad">
+      <div class="head">✗ 反例 · 偷工减料</div>
+      <pre><code>await page.locator(<span class="s">'input[type="text"]'</span>).fill(<span class="s">'alice'</span>);
+await page.locator(<span class="s">'button'</span>).click();
+await page.locator(<span class="s">'a.book-card'</span>).first().click();</code></pre>
+    </div>
+    <div class="code-block good">
+      <div class="head">✓ 正例 · user-facing</div>
+      <pre><code>await page.<span class="cmd">getByLabel</span>(<span class="s">'用户名'</span>).fill(<span class="s">'alice'</span>);
+await page.<span class="cmd">getByRole</span>(<span class="s">'button'</span>, { name: <span class="s">'登录'</span> }).click();
+await page.<span class="cmd">getByRole</span>(<span class="s">'link'</span>, { name: <span class="s">'重构'</span> }).click();</code></pre>
+    </div>
+  </div>
+
+  <div class="checks">
+    <div class="head">CHECKLIST · 6 项</div>
+    <ul>
+      <li>没有 CSS 长路径（nth-child / &gt; / :nth-of-type）</li>
+      <li>没有自动生成的类名（_abc123）</li>
+      <li>优先 getByRole/getByLabel/getByText/getByPlaceholder</li>
+      <li>少用 .first()，必须用要加注释说明</li>
+      <li>没有 XPath（除非真的没语义）</li>
+      <li>同组元素定位策略一致</li>
+    </ul>
+  </div>
+
+  <div class="callout info" style="margin-top:24px;">
+    <span class="badge">RULE</span><strong>用户视角语义永远优先于 CSS 路径。</strong>例外只有第三方组件库的奇怪结构 → 用 testid，且需团队约定。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">03 / 08</div></div>
+</div>
+</body>
+</html>

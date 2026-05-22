@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>书籍详情 - 迷你书店</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/books.html" class="brand">迷你书店</a>
+    <nav>
+      <a href="/cart.html" id="cart-link">购物车 (<span id="cart-count">0</span>)</a>
+      <span id="welcome"></span>
+      <button id="logout" type="button">退出</button>
+    </nav>
+  </header>
+
+  <main class="content" id="detail-root">
+    <p>加载中...</p>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    requireLogin();
+    renderTopbar();
+    const id = new URLSearchParams(location.search).get('id');
+    loadBooks().then(books => {
+      const book = books.find(b => b.id === id);
+      const root = document.getElementById('detail-root');
+      if (!book) {
+        root.innerHTML = '<p class="error">书籍不存在</p>';
+        return;
+      }
+      root.innerHTML = `
+        <article class="detail">
+          <div class="cover-large" aria-hidden="true">${book.cover}</div>
+          <div class="detail-body">
+            <h1>${book.title}</h1>
+            <p class="author">作者：${book.author}</p>
+            <p class="price">¥${book.price}</p>
+            ${book.discontinued ? '<p class="badge-discontinued">⚠️ 已下架</p>' : ''}
+            <p>${book.summary}</p>
+            <p class="stock">库存：${book.stock}</p>
+            <button id="add-to-cart" type="button">加入购物车</button>
+            <p id="add-result" class="success" role="status" hidden></p>
+          </div>
+        </article>
+      `;
+      document.getElementById('add-to-cart').addEventListener('click', () => {
+        // HIDDEN BUG: discontinued check is missing here. Add to cart succeeds
+        // even when book.discontinued === true. Planner agent should discover this.
+        addToCart(book.id);
+        const msg = document.getElementById('add-result');
+        msg.textContent = '已加入购物车';
+        msg.hidden = false;
+        renderTopbar();
+      });
+    });
+  </script>
+</body>
+</html>

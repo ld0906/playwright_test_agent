@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 03 · 唤起 prompt</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .wrong-right { margin-top:8px; display:grid; grid-template-columns:340px 1fr; gap:32px; align-items:start; }
+  .wrong-block { background:var(--bg-elev); border:1px solid rgba(248,113,113,0.24); border-radius:14px; padding:24px 28px; border-left:4px solid var(--danger); }
+  .wrong-block .lbl { font-family:var(--font-mono); font-size:14px; color:var(--danger); letter-spacing:0.1em; margin-bottom:12px; }
+  .wrong-block .quote { font-family:var(--font-mono); font-size:22px; color:var(--ink-2); margin-bottom:14px; }
+  .wrong-block .why { font-size:17px; color:var(--ink-3); line-height:1.55; }
+  pre { font-size:20px; padding:28px 32px; line-height:1.5; }
+  .details { margin-top:32px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .detail { padding:20px 24px; background:rgba(15,23,42,0.5); border-radius:10px; border-left:3px solid var(--accent); }
+  .detail .num { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:6px; }
+  .detail .body { font-size:18px; color:var(--ink-2); line-height:1.55; }
+  .detail .body code { color:var(--accent); font-size:16px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 03</span><span class="sep">/</span><span>Planner Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>唤起 Planner 的 prompt</h2>
+
+  <div class="wrong-right">
+    <div class="wrong-block">
+      <div class="lbl">✗ 错误做法</div>
+      <div class="quote">"帮我生成测试用例"</div>
+      <div class="why">太泛。AI 会凭脑子里的常识写，<strong style="color:var(--ink-1);">不会真去用浏览器</strong>。</div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">PROMPT</span>
+        <span class="path">paste into Claude Code</span>
+        <span class="meta">显式角色 + 显式工具 + 显式格式</span>
+      </div>
+      <pre><code>你扮演 Playwright Test Agents 中的 Planner Agent。
+
+请基于 <span class="cmd">./seed.md</span> 中描述的业务规则和风险关注点，
+通过 <span class="n">MCP 浏览器工具</span>实际探索 http://localhost:5173，
+产出测试计划，保存到 <span class="cmd">test-plans/mini-bookstore-plan.md</span>。
+
+要求：
+- <span class="s">真实点击页面</span>，不要凭想象
+- 按业务模块分组
+- 每条用例标注优先级（P0/P1/P2）
+- 单独列出风险用例小节
+- 探索中发现的疑似 bug 在末尾汇总</code></pre>
+    </div>
+  </div>
+
+  <div class="details">
+    <div class="detail">
+      <div class="num">DETAIL · 01</div>
+      <div class="body"><strong style="color:var(--ink-1);">显式"扮演 Planner"</strong> — AI 调整输出风格，更结构化</div>
+    </div>
+    <div class="detail">
+      <div class="num">DETAIL · 02</div>
+      <div class="body"><strong style="color:var(--ink-1);">显式"真实点击"</strong> — AI 才会用 MCP 浏览器工具，不偷懒</div>
+    </div>
+    <div class="detail">
+      <div class="num">DETAIL · 03</div>
+      <div class="body"><strong style="color:var(--ink-1);">显式输出路径</strong> — 方便后面 review、入 git</div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 08</div></div>
+</div>
+</body>
+</html>

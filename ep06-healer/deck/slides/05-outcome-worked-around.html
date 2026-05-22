@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 06 · 修绕</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .outcome-head { display:flex; align-items:center; gap:20px; margin-bottom:32px; }
+  .outcome-head .badge { font-family:var(--font-mono); font-size:18px; background:var(--accent-warm); color:#0F172A; padding:8px 20px; border-radius:8px; letter-spacing:0.1em; font-weight:700; }
+  .outcome-head .title { font-size:36px; font-weight:700; color:var(--ink-1); }
+
+  .step-row { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  pre { font-size:15px; padding:18px 22px; line-height:1.5; }
+  .diff-line { display:block; }
+  .diff-line.minus { color:var(--danger); }
+  .diff-line.plus  { color:var(--accent-warm); }
+  .diff-line.ctx { color:var(--ink-3); }
+
+  .reason-block { background:var(--bg-elev); border-radius:14px; padding:22px 26px; border:1px solid rgba(251,191,36,0.24); border-left:4px solid var(--accent-warm); }
+  .reason-block .lbl { font-family:var(--font-mono); font-size:13px; color:var(--accent-warm); letter-spacing:0.1em; margin-bottom:10px; }
+  .reason-block .quote { font-size:17px; color:var(--ink-2); line-height:1.5; font-style:italic; padding:12px 16px; background:rgba(15,23,42,0.5); border-radius:8px; margin-bottom:14px; }
+  .reason-block ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .reason-block ul li { display:flex; gap:10px; align-items:baseline; font-size:15px; color:var(--ink-2); line-height:1.45; }
+  .reason-block ul li::before { font-weight:700; flex-shrink:0; }
+  .reason-block ul li.ok::before { content:"✓"; color:var(--success); }
+  .reason-block ul li.bad::before { content:"⚠"; color:var(--danger); }
+  .reason-block ul li strong { color:var(--ink-1); }
+
+  .rule { margin-top:24px; padding:20px 28px; background:linear-gradient(135deg, rgba(248,113,113,0.08), rgba(251,191,36,0.04)); border:1px solid rgba(248,113,113,0.32); border-left:4px solid var(--danger); border-radius:8px; }
+  .rule .lbl { font-family:var(--font-mono); font-size:13px; color:var(--danger); letter-spacing:0.15em; margin-bottom:8px; }
+  .rule .text { font-size:20px; color:var(--ink-1); line-height:1.45; font-weight:600; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 06</span><span class="sep">/</span><span>Healer Agent</span></div>
+
+  <div class="outcome-head">
+    <span class="badge">🟡 OUTCOME · 02</span>
+    <span class="title">同场景 · Healer 也可能"修绕"</span>
+  </div>
+
+  <div class="step-row">
+    <div class="file-card" style="border-left:4px solid var(--accent-warm);">
+      <div class="file-head">
+        <span class="pill" style="background:rgba(251,191,36,0.16); color:var(--accent-warm);">BAD FIX</span>
+        <span class="path">悄悄弱化断言的修复</span>
+      </div>
+      <pre><code><span class="diff-line ctx">  // locator 改对了 ✓</span>
+<span class="diff-line plus">+ await page.getByRole('button',</span>
+<span class="diff-line plus">    { name: '立即购买' }).click();</span>
+
+<span class="diff-line ctx">  // 但断言被悄悄改弱了 ✗</span>
+<span class="diff-line minus">- await expect(row.locator('.qty-num'))</span>
+<span class="diff-line minus">    .toHaveText('3');</span>
+<span class="diff-line minus">- await expect(page.locator('#grand-total'))</span>
+<span class="diff-line minus">    .toHaveText(`¥${89 * 3}`);</span>
+<span class="diff-line plus">+ await expect(row.locator('.qty-num'))</span>
+<span class="diff-line plus">    .toBeVisible();</span>
+<span class="diff-line plus">+ await expect(page.locator('#grand-total'))</span>
+<span class="diff-line plus">    .toBeVisible();</span></code></pre>
+    </div>
+
+    <div class="reason-block">
+      <div class="lbl">HEALER 的"理由"</div>
+      <div class="quote">"toHaveText 偶尔会因为时序问题失败，改成 toBeVisible 更稳定。"</div>
+      <ul>
+        <li class="ok"><strong>locator 改对了</strong>（这是好的）</li>
+        <li class="bad"><strong>断言强度被削弱</strong><br>从"数量=3 且合计=267" → "元素出现就行"</li>
+        <li class="bad"><strong>Bug 风险</strong><br>购物车数量同步逻辑挂了它也不会知道</li>
+        <li class="bad"><strong>话术迷惑</strong><br>web-first assertion <strong>不应该</strong> flaky</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="lbl">守门规则</div>
+    <div class="text">⊘ Healer 只能改 locator，<span style="color:var(--danger);">不能改断言</span>。<br>需要改断言 → 必须出 PR 标 <code style="font-size:22px; color:var(--accent-warm);">@needs-human-review</code>。</div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 08</div></div>
+</div>
+</body>
+</html>

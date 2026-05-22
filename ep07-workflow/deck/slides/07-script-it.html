@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 07 · 脚本化</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  pre { font-size:18px; padding:24px 28px; line-height:1.55; }
+  .designed { background:var(--bg-elev); border-radius:14px; padding:28px 32px; border:1px solid rgba(148,163,184,0.08); border-left:4px solid var(--accent); }
+  .designed .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:14px; }
+  .designed .principle { font-size:24px; font-weight:600; color:var(--ink-1); margin-bottom:18px; line-height:1.4; }
+  .designed .principle em { color:var(--accent); font-style:normal; }
+  .designed ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .designed ul li { display:flex; gap:14px; align-items:baseline; font-size:18px; color:var(--ink-2); line-height:1.5; }
+  .designed ul li::before { content:"·"; color:var(--accent); font-weight:700; font-size:20px; flex-shrink:0; }
+  .designed ul li strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 07</span><span class="sep">/</span><span>完整工作流</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>把工作流脚本化（但不要自动化）</h2>
+
+  <div class="row">
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">SHELL</span>
+        <span class="path">run-agents.sh · 核心片段</span>
+      </div>
+      <pre><code><span class="cmt"># 半自动 SOP 引导脚本</span>
+<span class="cmd">pause()</span> {
+  yellow <span class="s">"→ $1"</span>
+  <span class="cmt"># 等用户回车，不是自动继续</span>
+  read -p <span class="s">"  完成后回车，Ctrl+C 中止："</span> _
+}
+
+<span class="cmt"># 每个 agent 调用前都 pause</span>
+pause <span class="s">"去 Claude Code 跑 Planner，</span>
+<span class="s">       产物 test-plan 更新好后回车"</span>
+
+pause <span class="s">"review test-plan，</span>
+<span class="s">       review 完回车"</span>
+
+pause <span class="s">"去 Claude Code 跑 Generator，</span>
+<span class="s">       specs 写完后回车"</span>
+
+npx playwright test
+<span class="cmt"># 红的进 Healer 守门 prompt</span></code></pre>
+    </div>
+
+    <div class="designed">
+      <div class="lbl">DESIGN PRINCIPLE</div>
+      <div class="principle">每一步都 <em>pause</em>，等你回车才继续。<br>这是<em>流程引导员</em>，不是自动化执行器。</div>
+      <ul>
+        <li><strong>不让 AI agent 自己唤起 AI agent</strong> —— 唤起决策权留在人手里</li>
+        <li><strong>"全自动" = "全风险"</strong> —— 前面 6 集 review 机制全失效</li>
+        <li><strong>固化 SOP 5 步</strong> —— 团队新人按脚本走，不会跳步</li>
+        <li><strong>本质</strong>：流程引导员，把"该停的地方"都标出来</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout danger" style="margin-top:32px;">
+    <span class="badge">⚠</span><strong>这不是"一键全自动"。</strong>脚本只是固化 SOP，团队按它走不会跳步 —— 这个区别请记住。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">07 / 08</div></div>
+</div>
+</body>
+</html>

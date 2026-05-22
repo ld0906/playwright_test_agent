@@ -1,0 +1,30 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "迷你书店" [ref=e3] [cursor=pointer]:
+      - /url: /books.html
+    - navigation [ref=e4]:
+      - link "购物车 (2)" [ref=e5] [cursor=pointer]:
+        - /url: /cart.html
+      - generic [ref=e6]: 你好，alice
+      - button "退出" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - heading "结账" [level=1] [ref=e9]
+    - form "结账表单" [ref=e11]:
+      - generic [ref=e12]:
+        - text: 收件人姓名
+        - textbox "收件人姓名" [ref=e13]
+      - generic [ref=e14]:
+        - text: 邮箱
+        - textbox "邮箱" [ref=e15]
+      - generic [ref=e16]:
+        - text: 收货地址
+        - textbox "收货地址" [ref=e17]
+      - group "支付方式" [ref=e18]:
+        - generic [ref=e19]: 支付方式
+        - generic [ref=e20]:
+          - radio "支付宝" [ref=e21]
+          - text: 支付宝
+        - generic [ref=e22]:
+          - radio "微信" [ref=e23]
+          - text: 微信
+      - button "提交订单" [ref=e24] [cursor=pointer]

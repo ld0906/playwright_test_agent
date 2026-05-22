@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第 1 集 · 三个代理</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 16px;
+  }
+
+  .agent-card {
+    background: var(--bg-elev);
+    border-radius: 20px;
+    padding: 48px 40px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .agent-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--primary);
+    opacity: 0.6;
+  }
+
+  .agent-card .num {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: var(--ink-4);
+    letter-spacing: 0.15em;
+  }
+
+  .agent-card .name {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--ink-1);
+    letter-spacing: -0.01em;
+    font-family: var(--font-display);
+  }
+
+  .agent-card .role {
+    font-size: 22px;
+    color: var(--accent);
+    margin-top: -16px;
+  }
+
+  .agent-card .io {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 12px;
+  }
+
+  .io-row {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .io-label {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--ink-4);
+    letter-spacing: 0.1em;
+    min-width: 80px;
+    text-transform: uppercase;
+  }
+  .io-value {
+    font-size: 21px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .footnote {
+    margin-top: 64px;
+    padding: 24px 32px;
+    background: rgba(37, 99, 235, 0.06);
+    border-left: 3px solid var(--primary);
+    border-radius: 4px;
+    font-size: 22px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .footnote strong {
+    color: var(--ink-1);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top">
+    <span class="ep-num">EP 01</span>
+    <span class="sep">/</span>
+    <span>课程地图</span>
+  </div>
+
+  <h2 class="h-content">
+    <span class="accent-line"></span>
+    先把名词搞清楚
+  </h2>
+
+  <div class="agents-grid">
+    <div class="agent-card">
+      <div class="num">AGENT · 01</div>
+      <div class="name">Planner</div>
+      <div class="role">会自己点页面 + 观察 + 写笔记的初级测试</div>
+      <div class="io">
+        <div class="io-row">
+          <span class="io-label">Input</span>
+          <span class="io-value">seed.md + 运行中的 app</span>
+        </div>
+        <div class="io-row">
+          <span class="io-label">Output</span>
+          <span class="io-value">Markdown 测试计划</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="num">AGENT · 02</div>
+      <div class="name">Generator</div>
+      <div class="role">把计划翻译成可运行 spec 的初级测开</div>
+      <div class="io">
+        <div class="io-row">
+          <span class="io-label">Input</span>
+          <span class="io-value">测试计划 + 项目结构</span>
+        </div>
+        <div class="io-row">
+          <span class="io-label">Output</span>
+          <span class="io-value">Playwright TypeScript spec</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="num">AGENT · 03</div>
+      <div class="name">Healer</div>
+      <div class="role">UI 改了帮你修脚本的初级运维</div>
+      <div class="io">
+        <div class="io-row">
+          <span class="io-label">Input</span>
+          <span class="io-value">失败的 spec + 当前 DOM</span>
+        </div>
+        <div class="io-row">
+          <span class="io-label">Output</span>
+          <span class="io-value">修复后的 spec</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    三个代理本质都是 <code>prompt + MCP</code>，没有黑魔法。<strong>关键不是 AI 多聪明，是你给它的输入好不好。</strong>
+  </div>
+
+  <div class="chrome-bottom">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>测试论道 · Playwright Test Agents 实战课</span>
+    </div>
+    <div class="page-num">02 / 07</div>
+  </div>
+</div>
+</body>
+</html>

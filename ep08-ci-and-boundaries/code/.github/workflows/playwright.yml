@@ -1,0 +1,62 @@
+# PR / push 触发的 Playwright 测试
+# 设计原则：
+# 1. PR 上只跑测试，不跑 agent。agent 留给 nightly。
+# 2. RISK-* 用 test.fail() 标记的预期失败不算红
+# 3. 真红的 PR 直接卡门禁，不允许 merge
+# 4. retry 只给 1 次，超过就是真问题
+
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tests-agents
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: tests-agents/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Start demo-app
+        run: |
+          cd ../demo-app
+          npm run dev &
+          npx wait-on http://localhost:5173 -t 30000
+
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=list,html
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests-agents/playwright-report
+          retention-days: 7
+
+      - name: Upload traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: traces
+          path: tests-agents/test-results
+          retention-days: 7

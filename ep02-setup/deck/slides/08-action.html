@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · 本集行动</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .action-wrap { margin-top:8px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+  .intro { font-size:26px; color:var(--ink-2); line-height:1.6; margin-bottom:24px; }
+  .intro strong { color:var(--ink-1); }
+  .check-list { display:flex; flex-direction:column; gap:18px; }
+  .check-item { display:grid; grid-template-columns:48px 1fr; gap:20px; align-items:flex-start; padding:24px 28px; background:var(--bg-elev); border-radius:12px; border:1px solid rgba(148,163,184,0.08); }
+  .check-box { width:36px; height:36px; border-radius:8px; border:2px solid var(--ink-4); flex-shrink:0; margin-top:2px; }
+  .check-text { font-size:23px; color:var(--ink-1); line-height:1.4; font-weight:500; }
+  .check-text .meta { display:block; font-size:18px; color:var(--ink-3); margin-top:6px; font-weight:400; }
+  .check-text .meta code { color:var(--accent); }
+
+  .right-col { display:flex; flex-direction:column; gap:28px; }
+  .next-card { background:linear-gradient(135deg, rgba(37,99,235,0.16), rgba(96,165,250,0.06)); border:1px solid rgba(37,99,235,0.32); border-radius:16px; padding:36px 40px; }
+  .next-label { font-family:var(--font-mono); font-size:16px; color:var(--accent); letter-spacing:0.1em; margin-bottom:12px; }
+  .next-title { font-size:36px; font-weight:700; color:var(--ink-1); line-height:1.2; margin-bottom:16px; }
+  .next-desc { font-size:22px; color:var(--ink-2); line-height:1.6; }
+  .next-desc code { color:var(--accent); }
+
+  .quote-card { padding:36px 40px; background:var(--bg-elev); border-radius:16px; border:1px solid rgba(148,163,184,0.08); border-left:4px solid var(--accent-warm); }
+  .quote-label { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.15em; margin-bottom:12px; }
+  .quote-text { font-size:24px; color:var(--ink-1); line-height:1.55; font-weight:500; }
+  .quote-text em { color:var(--accent-warm); font-style:normal; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>本集行动</h2>
+
+  <div class="action-wrap">
+    <div>
+      <div class="intro">四件事打勾就过关：</div>
+      <div class="check-list">
+        <div class="check-item"><div class="check-box"></div><div class="check-text">mini-bookstore 能跑通并能登录<span class="meta">用 <code>alice / password</code> 看到书籍列表</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">tests-agents 项目初始化成功<span class="meta">npx playwright test 跑通示例</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">.mcp.json 配置在项目根<span class="meta">JSON 格式校验通过</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">在 Claude Code 里成功截到登录页<span class="meta">这一步通过 = 环境完全 OK</span></div></div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="next-card">
+        <div class="next-label">NEXT · 第 3 集</div>
+        <div class="next-title">Planner Agent<br>让 AI 自己探索应用</div>
+        <div class="next-desc">写第一份 <code>seed.md</code>，让 AI 探索 mini-bookstore，看它能不能发现"已下架书能加购物车"的隐藏 bug。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-label">REMEMBER</div>
+        <div class="quote-text">这一集没有概念，全是动手。<br><em>把地基铺扎实，后面 6 集都靠它。</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">08 / 08</div></div>
+</div>
+</body>
+</html>

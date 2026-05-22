@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>结账 - 迷你书店</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/books.html" class="brand">迷你书店</a>
+    <nav>
+      <a href="/cart.html" id="cart-link">购物车 (<span id="cart-count">0</span>)</a>
+      <span id="welcome"></span>
+      <button id="logout" type="button">退出</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>结账</h1>
+    <div id="checkout-root"></div>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    requireLogin();
+    renderTopbar();
+
+    const root = document.getElementById('checkout-root');
+    const cart = getCart();
+
+    if (cart.length === 0) {
+      root.innerHTML = '<p class="empty">购物车是空的，无法结账</p>';
+    } else {
+      root.innerHTML = `
+        <form id="checkout-form" class="card" aria-label="结账表单" novalidate>
+          <label>
+            收件人姓名
+            <input name="name" required minlength="2" aria-label="收件人姓名">
+            <span class="field-error" data-for="name" hidden></span>
+          </label>
+          <label>
+            邮箱
+            <input name="email" type="email" required aria-label="邮箱">
+            <span class="field-error" data-for="email" hidden></span>
+          </label>
+          <label>
+            收货地址
+            <input name="address" required minlength="5" aria-label="收货地址">
+            <span class="field-error" data-for="address" hidden></span>
+          </label>
+          <fieldset>
+            <legend>支付方式</legend>
+            <label><input type="radio" name="payment" value="alipay" required> 支付宝</label>
+            <label><input type="radio" name="payment" value="wechat"> 微信</label>
+            <span class="field-error" data-for="payment" hidden></span>
+          </fieldset>
+          <button type="submit">提交订单</button>
+        </form>
+        <div id="checkout-success" hidden role="status">
+          <h2>下单成功 🎉</h2>
+          <p>订单号：<span id="order-id"></span></p>
+          <a href="/books.html">返回首页</a>
+        </div>
+      `;
+
+      document.getElementById('checkout-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const errors = {};
+        if (!fd.get('name') || fd.get('name').length < 2) errors.name = '姓名至少 2 个字';
+        if (!fd.get('email') || !/^.+@.+\..+$/.test(fd.get('email'))) errors.email = '请输入有效邮箱';
+        if (!fd.get('address') || fd.get('address').length < 5) errors.address = '地址至少 5 个字';
+        if (!fd.get('payment')) errors.payment = '请选择支付方式';
+
+        document.querySelectorAll('.field-error').forEach(el => { el.hidden = true; el.textContent = ''; });
+        Object.entries(errors).forEach(([key, msg]) => {
+          const el = document.querySelector(`.field-error[data-for="${key}"]`);
+          if (el) { el.textContent = msg; el.hidden = false; }
+        });
+
+        if (Object.keys(errors).length > 0) return;
+
+        const orderId = 'ORD' + Date.now();
+        clearCart();
+        renderTopbar();
+        document.getElementById('checkout-form').hidden = true;
+        document.getElementById('order-id').textContent = orderId;
+        document.getElementById('checkout-success').hidden = false;
+      });
+    }
+  </script>
+</body>
+</html>

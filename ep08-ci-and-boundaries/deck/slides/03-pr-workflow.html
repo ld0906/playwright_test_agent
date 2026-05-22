@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 08 · PR Workflow</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  pre { font-size:17px; padding:24px 28px; line-height:1.55; }
+  .points { margin-top:24px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .pt { padding:20px 24px; background:rgba(15,23,42,0.5); border-radius:10px; border-left:3px solid var(--accent); }
+  .pt .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:6px; }
+  .pt .body { font-size:18px; color:var(--ink-2); line-height:1.5; }
+  .pt .body code { color:var(--accent); font-size:16px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 08</span><span class="sep">/</span><span>CI 与边界</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>PR Workflow · playwright.yml</span></h2>
+
+  <div class="file-card">
+    <div class="file-head">
+      <span class="pill">YAML</span>
+      <span class="path">.github/workflows/playwright.yml</span>
+      <span class="meta">每个 PR / push 都跑</span>
+    </div>
+    <pre><code><span class="cmt">name:</span> Playwright Tests
+<span class="cmt">on:</span> { pull_request: { branches: [main] } }
+
+<span class="cmt">jobs:</span>
+  test:
+    <span class="cmt">runs-on:</span> ubuntu-latest
+    <span class="cmt">timeout-minutes:</span> 15
+    <span class="cmt">steps:</span>
+      - <span class="cmd">uses:</span> actions/checkout@v4
+      - <span class="cmd">uses:</span> actions/setup-node@v4 <span class="cmt">// node 20</span>
+      - <span class="cmd">run:</span> npm ci
+      - <span class="cmd">run:</span> npx playwright install <span class="n">--with-deps</span> chromium
+
+      - <span class="cmd">name:</span> Start demo-app
+        <span class="cmd">run:</span> |
+          cd ../demo-app && npm run dev &amp;
+          npx wait-on http://localhost:5173 <span class="n">-t 30000</span>
+
+      - <span class="cmd">run:</span> npx playwright test <span class="n">--reporter=list,html</span>
+
+      - <span class="cmd">uses:</span> actions/upload-artifact@v4
+        <span class="cmd">if:</span> failure()
+        <span class="cmt"># traces + screenshots，调试用</span></code></pre>
+  </div>
+
+  <div class="points">
+    <div class="pt">
+      <div class="lbl">DETAIL · 01</div>
+      <div class="body"><code>--with-deps</code> 装系统依赖，漏了 Ubuntu 会缺库报错</div>
+    </div>
+    <div class="pt">
+      <div class="lbl">DETAIL · 02</div>
+      <div class="body">用 <code>wait-on</code> 等服务起来，<strong style="color:var(--ink-1);">不要 sleep</strong></div>
+    </div>
+    <div class="pt">
+      <div class="lbl">DETAIL · 03</div>
+      <div class="body">timeout 15 分钟卡死。超时是真问题，不允许"机器慢"作借口</div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">03 / 09</div></div>
+</div>
+</body>
+</html>

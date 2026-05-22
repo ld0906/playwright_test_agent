@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 07 · 场景 A</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .scenario-head { padding:20px 28px; background:linear-gradient(135deg, rgba(96,165,250,0.16), rgba(96,165,250,0.04)); border:1px solid rgba(96,165,250,0.32); border-left:4px solid var(--accent); border-radius:10px; margin-bottom:24px; }
+  .scenario-head .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:8px; }
+  .scenario-head .title { font-size:32px; font-weight:700; color:var(--ink-1); }
+  .scenario-head .desc { font-size:18px; color:var(--ink-3); margin-top:8px; line-height:1.5; }
+
+  .flow-row { display:flex; gap:14px; align-items:stretch; }
+  .step-card { flex:1; background:var(--bg-elev); border-radius:12px; padding:22px 22px; border:1px solid rgba(148,163,184,0.08); display:flex; flex-direction:column; gap:12px; min-width:0; }
+  .step-card.skipped { opacity:0.4; background:rgba(15,23,42,0.5); border:1px dashed var(--divider); }
+  .step-card .num { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; }
+  .step-card .agent { font-size:18px; font-weight:600; color:var(--accent); }
+  .step-card.skipped .agent { color:var(--ink-4); }
+  .step-card .action { font-size:16px; color:var(--ink-2); line-height:1.5; }
+  .step-card .action code { color:var(--accent); font-size:14px; }
+  .step-card.skipped .action { color:var(--ink-4); }
+  .step-arrow { display:flex; align-items:center; color:var(--accent); font-size:24px; font-family:var(--font-mono); }
+
+  .key { margin-top:32px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 07</span><span class="sep">/</span><span>完整工作流</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>场景 A · 新增"清空购物车"功能</h2>
+
+  <div class="scenario-head">
+    <div class="lbl">SCENARIO A · NEW FEATURE</div>
+    <div class="title">产品提了新需求：购物车一键清空</div>
+    <div class="desc">点按钮 → 二次确认对话框 → 确认后清空</div>
+  </div>
+
+  <div class="flow-row">
+    <div class="step-card">
+      <div class="num">STEP 01</div>
+      <div class="agent">seed.md</div>
+      <div class="action">追加"批量清空"业务规则 4 行</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="num">STEP 02</div>
+      <div class="agent">Planner</div>
+      <div class="action"><strong style="color:var(--accent-warm);">"增量探索"</strong> prompt 关键<br>不要重写整份 plan</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="num">STEP 03</div>
+      <div class="agent">人工 review</div>
+      <div class="action">test-plan 多了 TC-22 到 25<br>调整优先级</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="num">STEP 04</div>
+      <div class="agent">Generator</div>
+      <div class="action"><strong style="color:var(--accent-warm);">"只为新用例生成"</strong><br>追加到现有 cart.spec.ts</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card skipped">
+      <div class="num">STEP 05</div>
+      <div class="agent">Healer</div>
+      <div class="action">不需要 —— 新增不是改动，现有 spec 不会挂</div>
+    </div>
+  </div>
+
+  <div class="callout success key">
+    <span class="badge">CORE</span><strong>本场景没有用到 Healer。</strong>新增 ≠ 改动 —— 这是场景 A 的关键学习点。
+  </div>
+
+  <div class="callout warn" style="margin-top:16px;">
+    <span class="badge">PROMPT</span>Planner 和 Generator 的 prompt 都要加 <code>"增量"</code> / <code>"追加到现有文件"</code> —— 否则 AI 会重写整个文件，前面的工调没了。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">05 / 08</div></div>
+</div>
+</body>
+</html>

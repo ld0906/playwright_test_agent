@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · 让 AI 自审</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .review-flow { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  pre { font-size:18px; padding:24px 28px; line-height:1.55; }
+
+  .output-tbl { background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .output-tbl .head { padding:16px 24px; background:#0B1220; border-bottom:1px solid var(--divider); display:flex; gap:12px; align-items:center; }
+  .output-tbl .head .pill { padding:4px 10px; background:rgba(96,165,250,0.16); color:var(--accent); font-family:var(--font-mono); font-size:13px; border-radius:5px; }
+  .output-tbl .head .name { font-family:var(--font-mono); font-size:16px; color:var(--ink-2); }
+  .output-tbl table { font-size:17px; }
+  .output-tbl th { padding:14px 20px; font-size:13px; }
+  .output-tbl td { padding:14px 20px; vertical-align:top; }
+  .output-tbl td.file { font-family:var(--font-mono); color:var(--ink-3); }
+  .output-tbl td.violation { color:var(--danger); }
+  .output-tbl td.fix { color:var(--success); font-family:var(--font-mono); font-size:15px; }
+
+  .blind { margin-top:32px; padding:24px 32px; background:rgba(248,113,113,0.06); border-left:3px solid var(--danger); border-radius:8px; display:flex; align-items:center; gap:24px; }
+  .blind .icon { width:44px; height:44px; background:rgba(248,113,113,0.18); color:var(--danger); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; font-family:var(--font-mono); flex-shrink:0; }
+  .blind .body { font-size:20px; color:var(--ink-2); line-height:1.55; }
+  .blind .body strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>把 review 交给 AI 自己做</h2>
+
+  <div class="review-flow">
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">PROMPT</span>
+        <span class="path">把 review-checklist 整段贴进 Claude Code</span>
+      </div>
+      <pre><code><span class="cmt"># review-checklist.md 完整 18 项</span>
+<span class="cmt"># （省略）</span>
+
+对照上面 18 项清单，逐项检查
+<span class="cmd">tests-agents/specs/</span> 下所有 .spec.ts，
+列出违反项（具体到文件:行），
+给出修复建议。</code></pre>
+    </div>
+
+    <div class="output-tbl">
+      <div class="head">
+        <span class="pill">OUTPUT</span>
+        <span class="name">AI 自审报告（示例）</span>
+      </div>
+      <table>
+        <thead><tr><th>文件:行</th><th>违反</th><th>修复</th></tr></thead>
+        <tbody>
+          <tr><td class="file">cart.spec.ts:15</td><td class="violation">waitForTimeout</td><td class="fix">→ toHaveText('3')</td></tr>
+          <tr><td class="file">books.spec.ts:22</td><td class="violation">nth-child locator</td><td class="fix">→ getByRole(...)</td></tr>
+          <tr><td class="file">checkout.spec.ts:38</td><td class="violation">仅 toBeVisible</td><td class="fix">→ 加业务字段断言</td></tr>
+          <tr><td class="file">auth.spec.ts:12</td><td class="violation">.first() 无注释</td><td class="fix">→ getByLabel 或加注释</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="blind">
+    <div class="icon">⚠</div>
+    <div class="body"><strong>AI 自审的盲点：</strong>它检测<strong style="color:var(--danger);">不到</strong>自己写的 <code>or()</code> 永远绿断言 —— 对它来说"或断言"是合理语法。这一项必须人工查。</div>
+  </div>
+
+  <div class="callout info" style="margin-top:20px;">
+    <span class="badge">RULE</span>清单进 git → AI 自审 → 人工抽查"或断言" —— <strong>三层防御</strong>。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">07 / 08</div></div>
+</div>
+</body>
+</html>

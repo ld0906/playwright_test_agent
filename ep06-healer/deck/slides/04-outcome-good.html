@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 06 · 理想结局</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .outcome-head { display:flex; align-items:center; gap:20px; margin-bottom:32px; }
+  .outcome-head .badge { font-family:var(--font-mono); font-size:18px; background:var(--success); color:#0F172A; padding:8px 20px; border-radius:8px; letter-spacing:0.1em; font-weight:700; }
+  .outcome-head .title { font-size:40px; font-weight:700; color:var(--ink-1); }
+
+  .step-row { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  pre { font-size:18px; padding:24px 28px; line-height:1.55; }
+  .diff-line { display:block; }
+  .diff-line.minus { color:var(--danger); }
+  .diff-line.plus  { color:var(--success); }
+  .diff-line.ctx { color:var(--ink-3); }
+
+  .explain { background:var(--bg-elev); border-radius:14px; padding:28px 32px; border:1px solid rgba(148,163,184,0.08); border-left:4px solid var(--success); }
+  .explain .lbl { font-family:var(--font-mono); font-size:14px; color:var(--success); letter-spacing:0.1em; margin-bottom:12px; }
+  .explain .quote { font-size:20px; color:var(--ink-2); line-height:1.6; font-style:italic; padding:18px 22px; background:rgba(15,23,42,0.5); border-radius:8px; margin-bottom:18px; border-left:3px solid var(--ink-4); }
+  .explain ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .explain ul li { display:flex; gap:12px; align-items:baseline; font-size:19px; color:var(--ink-2); line-height:1.5; }
+  .explain ul li::before { content:"✓"; color:var(--success); font-weight:700; flex-shrink:0; }
+  .explain ul li strong { color:var(--ink-1); }
+
+  .why { margin-top:32px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 06</span><span class="sep">/</span><span>Healer Agent</span></div>
+
+  <div class="outcome-head">
+    <span class="badge">✅ OUTCOME · 01</span>
+    <span class="title">Broken A · 理想结局 · 修对</span>
+  </div>
+
+  <div class="step-row">
+    <div class="file-card" style="border-left:4px solid var(--success);">
+      <div class="file-head">
+        <span class="pill" style="background:rgba(52,211,153,0.16); color:var(--success);">DIFF</span>
+        <span class="path">cart.spec.ts · Healer 的修改</span>
+      </div>
+      <pre><code><span class="diff-line ctx">  await page.goto('/book.html?id=b001');</span>
+
+<span class="diff-line minus">- await page.getByRole('button',</span>
+<span class="diff-line minus">    { name: '加入购物车' }).click();</span>
+<span class="diff-line plus">+ await page.getByRole('button',</span>
+<span class="diff-line plus">    { name: '立即购买' }).click();</span>
+
+<span class="diff-line ctx">  await expect(page.locator('#cart-count'))</span>
+<span class="diff-line ctx">    .toHaveText('1');</span></code></pre>
+    </div>
+
+    <div class="explain">
+      <div class="lbl">HEALER 的解释</div>
+      <div class="quote">"按钮的可访问名现在是'立即购买'，这是明确的文案重命名，业务意图（点击触发加车）未变。我同步更新 locator。"</div>
+      <ul>
+        <li><strong>意图明确</strong> — 按钮位置 / ID / 行为均未变</li>
+        <li><strong>断言未受影响</strong> — <code>toHaveText('1')</code> 仍验证业务</li>
+        <li><strong>可解释</strong> — Healer 写清楚修改原因</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout success why">
+    <span class="badge">理想场景</span><strong>UI 表层变了，业务底层没变</strong> —— 这是 Healer 最好的应用。npx playwright test 再跑全绿。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 06 · 灾难现场</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .outcome-head { display:flex; align-items:center; gap:20px; margin-bottom:24px; }
+  .outcome-head .badge { font-family:var(--font-mono); font-size:18px; background:var(--danger); color:#0F172A; padding:8px 20px; border-radius:8px; letter-spacing:0.1em; font-weight:700; }
+  .outcome-head .title { font-size:40px; font-weight:700; color:var(--ink-1); }
+
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  pre { font-size:17px; padding:22px 26px; line-height:1.55; }
+  .diff-line { display:block; }
+  .diff-line.minus { color:var(--danger); }
+  .diff-line.plus  { color:var(--accent); }
+
+  .disaster { background:linear-gradient(135deg, rgba(248,113,113,0.16), rgba(248,113,113,0.04)); border:1px solid rgba(248,113,113,0.4); border-left:4px solid var(--danger); border-radius:14px; padding:28px 32px; }
+  .disaster .lbl { font-family:var(--font-mono); font-size:14px; color:var(--danger); letter-spacing:0.1em; margin-bottom:14px; }
+  .disaster ul { list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .disaster ul li { display:flex; gap:14px; align-items:baseline; font-size:19px; color:var(--ink-2); line-height:1.5; }
+  .disaster ul li::before { content:"🔴"; flex-shrink:0; }
+  .disaster ul li strong { color:var(--ink-1); }
+
+  .truth { margin-top:32px; padding:24px 32px; background:var(--bg-elev); border:1px solid rgba(148,163,184,0.1); border-left:4px solid var(--accent-warm); border-radius:8px; }
+  .truth .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent-warm); letter-spacing:0.1em; margin-bottom:12px; }
+  .truth .body { font-size:21px; color:var(--ink-2); line-height:1.5; }
+  .truth .body strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 06</span><span class="sep">/</span><span>Healer Agent</span></div>
+
+  <div class="outcome-head">
+    <span class="badge">🔴 OUTCOME · 03</span>
+    <span class="title">Broken B · 灾难现场 · bug 上线</span>
+  </div>
+
+  <div class="row">
+    <div class="file-card" style="border-left:4px solid var(--danger);">
+      <div class="file-head">
+        <span class="pill" style="background:rgba(248,113,113,0.16); color:var(--danger);">机械替换</span>
+        <span class="path">Healer 的"成功"修复</span>
+      </div>
+      <pre><code><span class="diff-line minus">- await page.locator(</span>
+<span class="diff-line minus">    'input[name="username"]'</span>
+<span class="diff-line minus">  ).fill('alice');</span>
+<span class="diff-line plus">+ await page.locator(</span>
+<span class="diff-line plus">    'input[name="userId"]'</span>
+<span class="diff-line plus">  ).fill('alice');</span></code></pre>
+      <div style="padding:14px 22px; background:rgba(52,211,153,0.06); border-top:1px solid var(--divider); font-size:17px; color:var(--success); font-family:var(--font-mono);">▷ npx playwright test · 全绿</div>
+    </div>
+
+    <div class="disaster">
+      <div class="lbl">实际后果</div>
+      <ul>
+        <li><strong>form field name 改了 = 后端 API 字段也要改</strong></li>
+        <li><strong>如果开发只改了前端</strong><br>生产 POST 上去字段对不上，登录全挂</li>
+        <li><strong>测试绿了 → PR 合并 → bug 上线</strong></li>
+        <li><strong>用户报"登不上"才被发现</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="truth">
+    <div class="lbl">FAILURE MODE</div>
+    <div class="body">AI 把 <strong>"locator 失效"</strong> 和 <strong>"业务 bug"</strong> 当成同一件事 ——<br>Healer 没错，它的本职就是让红变绿。错在我们<strong>没告诉它哪些不该修</strong>。</div>
+  </div>
+
+  <div class="callout danger" style="margin-top:24px;">
+    <span class="badge">CORE</span>这就是测试人的价值 —— <strong>让 AI 知道哪些不是 locator 问题</strong>。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

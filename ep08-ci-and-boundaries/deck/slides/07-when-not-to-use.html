@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 08 · 4 种不该用</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .grid4 { margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .item { background:var(--bg-elev); border-radius:14px; padding:32px 32px; border:1px solid rgba(248,113,113,0.18); border-left:4px solid var(--danger); display:flex; flex-direction:column; gap:14px; }
+  .item .head { display:flex; align-items:center; gap:18px; }
+  .item .num { width:48px; height:48px; background:rgba(248,113,113,0.18); color:var(--danger); border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:22px; font-weight:700; flex-shrink:0; }
+  .item .ttl { font-size:26px; font-weight:600; color:var(--ink-1); line-height:1.3; }
+  .item .who { font-size:18px; color:var(--ink-2); line-height:1.55; }
+  .item .who .ex { color:var(--ink-3); font-size:16px; }
+  .item .why { padding-top:12px; border-top:1px dashed var(--divider); font-size:17px; color:var(--ink-3); line-height:1.5; }
+  .item .why strong { color:var(--danger); }
+  .item .why code { color:var(--ink-2); font-size:15px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 08</span><span class="sep">/</span><span>CI 与边界</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>4 种不该用 Test Agents 的场景</h2>
+
+  <div class="grid4">
+    <div class="item">
+      <div class="head"><div class="num">01</div><div class="ttl">高风险关键业务</div></div>
+      <div class="who">支付、医疗、风控、合规<br><span class="ex">— 错一个边界就是钱、命、法律责任</span></div>
+      <div class="why"><strong>风险：</strong>AI 生成断言倾向"看起来对"，不倾向"穷举边界"。<code>手写</code> + 资深测试结对评审。</div>
+    </div>
+
+    <div class="item">
+      <div class="head"><div class="num">02</div><div class="ttl">页面没有稳定语义</div></div>
+      <div class="who">第三方组件库 SSR、Canvas 图表、iframe<br><span class="ex">— 没有 ARIA / label / testid</span></div>
+      <div class="why"><strong>风险：</strong>Planner 拿不到稳定 locator，Generator 写 CSS 长路径 —— 回到录制脚本老路。<code>先治可访问性</code>。</div>
+    </div>
+
+    <div class="item">
+      <div class="head"><div class="num">03</div><div class="ttl">缺少 seed 文档</div></div>
+      <div class="who">祖传系统没 PRD、产品拒绝写规则<br><span class="ex">— 需求只在群聊和会议里</span></div>
+      <div class="why"><strong>风险：</strong>Planner 在 UI 表面打转，发现不了业务 bug。可用 Planner <code>倒逼业务方</code>梳理。</div>
+    </div>
+
+    <div class="item">
+      <div class="head"><div class="num">04</div><div class="ttl">团队没 review 文化</div></div>
+      <div class="who">PR 秒批、测试代码没人看<br><span class="ex">— 断言写啥都过</span></div>
+      <div class="why"><strong>风险：</strong>AI 偷工减料直接进 CI、Healer 灾难性修复直接放生 —— <code>放大</code>团队 review 缺失。</div>
+    </div>
+  </div>
+
+  <div class="callout danger" style="margin-top:32px;">
+    <span class="badge">自查门槛</span>这 4 条<strong>全要过</strong>才用 Test Agents。任何一项不过 —— 先解决那项，再来。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">07 / 09</div></div>
+</div>
+</body>
+</html>

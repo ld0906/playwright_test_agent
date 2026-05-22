@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>购物车 - 迷你书店</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/books.html" class="brand">迷你书店</a>
+    <nav>
+      <a href="/cart.html" id="cart-link">购物车 (<span id="cart-count">0</span>)</a>
+      <span id="welcome"></span>
+      <button id="logout" type="button">退出</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>购物车</h1>
+    <div id="cart-root"></div>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    requireLogin();
+    renderTopbar();
+
+    function renderCart() {
+      const root = document.getElementById('cart-root');
+      const cart = getCart();
+      if (cart.length === 0) {
+        root.innerHTML = '<p class="empty">购物车是空的，<a href="/books.html">去逛逛</a></p>';
+        return;
+      }
+      loadBooks().then(books => {
+        const rows = cart.map(item => {
+          const book = books.find(b => b.id === item.id);
+          if (!book) return '';
+          return `
+            <li class="cart-row" data-book-id="${book.id}">
+              <span class="cover-small" aria-hidden="true">${book.cover}</span>
+              <span class="cart-title">${book.title}</span>
+              <span class="cart-price">¥${book.price}</span>
+              <span class="qty">
+                <button class="qty-dec" aria-label="减少">-</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-inc" aria-label="增加">+</button>
+              </span>
+              <span class="line-total">¥${book.price * item.qty}</span>
+              <button class="remove" aria-label="移除">移除</button>
+            </li>
+          `;
+        }).join('');
+        const total = cart.reduce((sum, item) => {
+          const book = books.find(b => b.id === item.id);
+          return sum + (book ? book.price * item.qty : 0);
+        }, 0);
+        root.innerHTML = `
+          <ul class="cart-list">${rows}</ul>
+          <div class="cart-footer">
+            <p class="total">合计：<span id="grand-total">¥${total}</span></p>
+            <a class="btn-primary" href="/checkout.html">去结账</a>
+          </div>
+        `;
+        root.querySelectorAll('.cart-row').forEach(row => {
+          const id = row.dataset.bookId;
+          row.querySelector('.qty-inc').addEventListener('click', () => { updateQty(id, 1); renderCart(); renderTopbar(); });
+          row.querySelector('.qty-dec').addEventListener('click', () => { updateQty(id, -1); renderCart(); renderTopbar(); });
+          row.querySelector('.remove').addEventListener('click', () => { removeFromCart(id); renderCart(); renderTopbar(); });
+        });
+      });
+    }
+    renderCart();
+  </script>
+</body>
+</html>

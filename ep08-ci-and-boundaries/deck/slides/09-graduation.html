@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 08 · 结业</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .grad-page { width:1920px; height:1080px; padding:96px 128px; position:relative; display:flex; flex-direction:column;
+    background: radial-gradient(ellipse at top right, rgba(37,99,235,0.16), transparent 50%), radial-gradient(ellipse at bottom left, rgba(251,191,36,0.08), transparent 60%), var(--bg); }
+  .grad-badge { display:inline-flex; align-items:center; gap:14px; padding:10px 22px; background:rgba(251,191,36,0.14); border:1px solid rgba(251,191,36,0.4); border-radius:999px; font-family:var(--font-mono); font-size:20px; color:var(--accent-warm); letter-spacing:0.15em; margin-bottom:48px; width:fit-content; }
+  .grad-badge .dot { width:8px; height:8px; background:var(--accent-warm); border-radius:50%; }
+  .grad-title { font-size:80px; font-weight:700; line-height:1.1; letter-spacing:-0.02em; color:var(--ink-1); margin-bottom:48px; }
+  .grad-title em { color:var(--accent-warm); font-style:normal; }
+
+  .three-quotes { display:flex; flex-direction:column; gap:20px; margin-bottom:48px; }
+  .q { display:grid; grid-template-columns:64px 1fr; gap:24px; align-items:center; padding:20px 28px; background:var(--bg-elev); border-radius:12px; border:1px solid rgba(148,163,184,0.1); border-left:4px solid var(--accent-warm); }
+  .q .num { font-family:var(--font-mono); font-size:36px; font-weight:700; color:var(--accent-warm); text-align:center; line-height:1; }
+  .q .text { font-size:26px; color:var(--ink-1); line-height:1.45; font-weight:500; }
+  .q .text em { color:var(--accent-warm); font-style:normal; }
+
+  .closing { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:auto; }
+  .next-step { background:rgba(37,99,235,0.08); border-left:4px solid var(--primary); border-radius:8px; padding:24px 28px; }
+  .next-step .lbl { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:0.1em; margin-bottom:10px; }
+  .next-step .title { font-size:22px; font-weight:600; color:var(--ink-1); margin-bottom:10px; }
+  .next-step .body { font-size:18px; color:var(--ink-3); line-height:1.55; }
+
+  .contact { background:rgba(15,23,42,0.5); border-radius:8px; padding:24px 28px; }
+  .contact .lbl { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:10px; }
+  .contact .item { font-size:18px; color:var(--ink-2); line-height:1.8; }
+  .contact .item code { color:var(--accent); font-size:16px; }
+
+  .corner { position:absolute; top:96px; right:128px; font-family:var(--font-mono); font-size:18px; color:var(--ink-4); letter-spacing:0.15em; }
+</style></head>
+<body>
+<div class="grad-page">
+  <div class="corner">09 / 09 · 结业</div>
+
+  <div class="grad-badge"><span class="dot"></span>🎓 结业 · 三句话送你</div>
+
+  <h1 class="grad-title">谢谢你的<br>8 集陪伴</h1>
+
+  <div class="three-quotes">
+    <div class="q">
+      <div class="num">01</div>
+      <div class="text">AI 写脚本只是入门，<em>让脚本能进 CI 才是工程</em></div>
+    </div>
+    <div class="q">
+      <div class="num">02</div>
+      <div class="text">Healer 修对了 ≠ 真对了 —— <em>事前 prompt 比事后 review 便宜</em></div>
+    </div>
+    <div class="q">
+      <div class="num">03</div>
+      <div class="text">会用工具是入门，<em>知道什么时候不用，是工程化</em></div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <div class="next-step">
+      <div class="lbl">YOUR NEXT MOVE</div>
+      <div class="title">把这套工作流迁到你手边的项目</div>
+      <div class="body">第一次迁会发现一堆水土不服 —— <strong style="color:var(--ink-1);">那才是真正学习的开始</strong>。迁完欢迎来交流。</div>
+    </div>
+    <div class="contact">
+      <div class="lbl">CONNECT</div>
+      <div class="item">
+        <span style="color:var(--ink-3);">公众号</span> · <strong style="color:var(--ink-1);">测试论道</strong><br>
+        <span style="color:var(--ink-3);">邮箱</span> · <code>SweetPotatowln@webname.com</code><br>
+        <span style="color:var(--ink-3);">课程仓库</span> · <code>[占位 · 开课时填]</code>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

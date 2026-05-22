@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 07 · 不一键全跑</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .vs { margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .col { background:var(--bg-elev); border-radius:14px; padding:36px 36px; border:1px solid rgba(148,163,184,0.08); }
+  .col.bad  { border-left:4px solid var(--danger); }
+  .col.good { border-left:4px solid var(--success); }
+  .col .head { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+  .col .pill { font-family:var(--font-mono); font-size:14px; padding:5px 12px; border-radius:5px; letter-spacing:0.1em; font-weight:600; }
+  .col.bad .pill  { background:rgba(248,113,113,0.18); color:var(--danger); }
+  .col.good .pill { background:rgba(52,211,153,0.18); color:var(--success); }
+  .col .name { font-size:28px; font-weight:700; color:var(--ink-1); }
+  .col ul { list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .col ul li { display:flex; gap:14px; align-items:baseline; font-size:20px; color:var(--ink-2); line-height:1.5; }
+  .col.bad ul li::before  { content:"✗"; color:var(--danger); font-weight:700; flex-shrink:0; }
+  .col.good ul li::before { content:"✓"; color:var(--success); font-weight:700; flex-shrink:0; }
+  .col ul li strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 07</span><span class="sep">/</span><span>完整工作流</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>先泼一盆冷水 · 为什么不做"一键全跑"</h2>
+
+  <div class="vs">
+    <div class="col bad">
+      <div class="head"><span class="pill">🔴 一键全跑</span><span class="name">的问题</span></div>
+      <ul>
+        <li><strong>AI 各步偷工减料</strong>没人发现</li>
+        <li><strong>bug 进入回归基线</strong>没人确认</li>
+        <li><strong>Healer 灾难性修复</strong>直接 push</li>
+        <li>前 6 集建立的所有 review 机制 <strong>瞬间归零</strong></li>
+      </ul>
+    </div>
+
+    <div class="col good">
+      <div class="head"><span class="pill">🟢 半自动 SOP</span><span class="name">的价值</span></div>
+      <ul>
+        <li>该 AI 做的让 AI 做（探索 / 生成 / 修复）</li>
+        <li>该人做的人做（业务判断 / 断言深度 / 上线决策）</li>
+        <li>每步都有 <strong>review 关卡</strong></li>
+        <li>这一集要建的就是<strong>这个 SOP</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout danger" style="margin-top:48px;">
+    <span class="badge">CORE</span><strong>一键全跑 = 一键全风险。</strong>正确做法是半自动 SOP，下一页讲怎么走。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>

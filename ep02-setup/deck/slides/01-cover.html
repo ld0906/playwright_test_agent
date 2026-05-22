@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · 封面</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .cover { width:1920px; height:1080px; padding:128px; display:flex; flex-direction:column; justify-content:center; position:relative;
+    background: radial-gradient(ellipse at top right, rgba(37,99,235,0.18), transparent 50%), radial-gradient(ellipse at bottom left, rgba(96,165,250,0.08), transparent 60%), var(--bg); }
+  .ep-badge { display:inline-flex; align-items:center; gap:14px; padding:10px 22px; background:rgba(37,99,235,0.14); border:1px solid rgba(37,99,235,0.4); border-radius:999px; font-family:var(--font-mono); font-size:22px; color:var(--accent); letter-spacing:0.1em; margin-bottom:64px; width:fit-content; }
+  .ep-badge .dot { width:8px; height:8px; background:var(--accent); border-radius:50%; }
+  .cover-title { font-size:108px; font-weight:700; line-height:1.05; letter-spacing:-0.02em; color:var(--ink-1); margin-bottom:40px; }
+  .cover-sub { font-size:36px; line-height:1.5; color:var(--ink-2); max-width:1280px; font-weight:400; }
+  .cover-foot { position:absolute; bottom:96px; left:128px; right:128px; display:flex; justify-content:space-between; align-items:flex-end; font-size:22px; }
+  .cover-foot .brand { display:flex; align-items:center; gap:16px; color:var(--ink-2); }
+  .cover-foot .brand-dot { width:10px; height:10px; background:var(--primary); border-radius:50%; }
+  .cover-foot .brand-name { font-weight:600; color:var(--ink-1); }
+  .cover-foot .meta { color:var(--ink-3); text-align:right; line-height:1.6; }
+  .corner-mark { position:absolute; top:96px; right:128px; font-family:var(--font-mono); font-size:18px; color:var(--ink-4); letter-spacing:0.15em; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="corner-mark">02 / 08</div>
+  <div class="ep-badge"><span class="dot"></span>第 2 集 · 环境搭建</div>
+  <h1 class="cover-title">Playwright + MCP<br>+ Claude Code 一次跑通</h1>
+  <p class="cover-sub">整集没有概念，全是动手 ——<br>四步把后面 6 集的地基铺好</p>
+  <div class="cover-foot">
+    <div class="brand"><span class="brand-dot"></span><span class="brand-name">测试论道</span><span style="color:var(--ink-4);">·</span><span>Playwright Test Agents 实战课</span></div>
+    <div class="meta">9 分钟 · Hello World 集<br>动手时间 ≈ 30 分钟</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 03 · 演示</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .timeline { margin-top:24px; display:flex; flex-direction:column; gap:14px; }
+  .step { display:grid; grid-template-columns:100px 1fr 220px; gap:24px; align-items:center; padding:18px 24px; background:var(--bg-elev); border-radius:10px; border:1px solid rgba(148,163,184,0.08); }
+  .step .t { font-family:var(--font-mono); font-size:18px; color:var(--accent); letter-spacing:0.05em; }
+  .step .action { font-size:20px; color:var(--ink-1); line-height:1.5; }
+  .step .action code { color:var(--accent); font-size:18px; }
+  .step .tool { text-align:right; font-family:var(--font-mono); font-size:16px; color:var(--ink-3); }
+  .step.thinking { border-left:3px solid var(--ink-4); }
+  .step.action-step { border-left:3px solid var(--accent); }
+  .step.discovery { border-left:3px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+  .step.delivery { border-left:3px solid var(--success); background:rgba(52,211,153,0.05); }
+  .hint { margin-top:32px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 03</span><span class="sep">/</span><span>Planner Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>演示 · 让 Planner 跑起来</h2>
+
+  <div class="timeline">
+    <div class="step action-step">
+      <div class="t">00:00</div>
+      <div class="action">读 <code>seed.md</code> → 决定从登录开始</div>
+      <div class="tool">browser_navigate</div>
+    </div>
+    <div class="step action-step">
+      <div class="t">00:20</div>
+      <div class="action">登录页 <code>alice / password</code> → 跳到列表</div>
+      <div class="tool">browser_type · browser_click</div>
+    </div>
+    <div class="step action-step">
+      <div class="t">00:50</div>
+      <div class="action">分类筛选 → 工程 / 小说 / 心理 各 snapshot</div>
+      <div class="tool">browser_select · snapshot</div>
+    </div>
+    <div class="step action-step">
+      <div class="t">01:30</div>
+      <div class="action">点进详情 → 加车 → 看购物车计数变化</div>
+      <div class="tool">browser_click · DOM read</div>
+    </div>
+    <div class="step discovery">
+      <div class="t">02:40</div>
+      <div class="action"><strong style="color:var(--accent-warm);">🎯 注意"已下架"徽章</strong> → 试着点加车 → 居然成功</div>
+      <div class="tool">browser_click · alert</div>
+    </div>
+    <div class="step action-step">
+      <div class="t">03:30</div>
+      <div class="action">购物车 → 数量 +/- → 减到 0 行被移除</div>
+      <div class="tool">browser_click ×6</div>
+    </div>
+    <div class="step action-step">
+      <div class="t">04:20</div>
+      <div class="action">结账表单 → 故意填错邮箱 / 短姓名 / 不勾支付方式</div>
+      <div class="tool">browser_type · submit</div>
+    </div>
+    <div class="step delivery">
+      <div class="t">05:10</div>
+      <div class="action"><strong style="color:var(--success);">📄 写出 test-plan</strong> → 22 条用例 + 风险用例小节 + bug 汇总</div>
+      <div class="tool">file_write</div>
+    </div>
+  </div>
+
+  <div class="callout warn hint">
+    <span class="badge">TIP</span>看它跑偏（钻牛角尖某个细节），<strong>打断</strong>说"够了，开始写计划"。AI 探索时的<strong>"试错"</strong>是好事，说明它在用真实反馈调整。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">06 / 08</div></div>
+</div>
+</body>
+</html>

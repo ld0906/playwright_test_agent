@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 08 · Nightly 基线</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .layout { margin-top:16px; display:grid; grid-template-columns:1fr 1.1fr; gap:32px; }
+  pre { font-size:16px; padding:20px 24px; line-height:1.55; }
+
+  .triggers { display:flex; flex-direction:column; gap:18px; }
+  .trigger { padding:24px 28px; background:var(--bg-elev); border-radius:12px; border:1px solid rgba(148,163,184,0.08); }
+  .trigger.t1 { border-left:4px solid var(--danger); }
+  .trigger.t2 { border-left:4px solid var(--accent-warm); }
+  .trigger .head { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+  .trigger .pill { font-family:var(--font-mono); font-size:13px; padding:4px 10px; border-radius:5px; letter-spacing:0.1em; font-weight:600; }
+  .trigger.t1 .pill { background:rgba(248,113,113,0.18); color:var(--danger); }
+  .trigger.t2 .pill { background:rgba(251,191,36,0.18); color:var(--accent-warm); }
+  .trigger .title { font-size:21px; font-weight:600; color:var(--ink-1); }
+  .trigger .desc { font-size:18px; color:var(--ink-2); line-height:1.55; }
+  .trigger .desc strong { color:var(--ink-1); }
+  .trigger .action { margin-top:12px; padding:10px 16px; background:rgba(15,23,42,0.5); border-radius:6px; font-family:var(--font-mono); font-size:15px; color:var(--accent); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 08</span><span class="sep">/</span><span>CI 与边界</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>Nightly + 基线检测</h2>
+
+  <div class="layout">
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">JSON</span>
+        <span class="path">tests-agents/baseline.json</span>
+        <span class="meta">预期失败用例清单</span>
+      </div>
+      <pre><code>{
+  <span class="s">"_README"</span>:
+    <span class="s">"用例 → 预期状态。test.fail() 填 'failed'"</span>,
+  <span class="s">"RISK-02 已下架书不应能加入购物车"</span>:
+    <span class="s">"failed"</span>,
+  <span class="s">"RISK-03 库存为 0 的书不应能加入购物车"</span>:
+    <span class="s">"failed"</span>
+}</code></pre>
+    </div>
+
+    <div class="triggers">
+      <div class="trigger t1">
+        <div class="head"><span class="pill">🔴 ALERT 01</span><span class="title">真红</span></div>
+        <div class="desc">预期通过的用例失败了 —— 正常处理</div>
+        <div class="action">→ 打开 issue · 修 bug</div>
+      </div>
+      <div class="trigger t2">
+        <div class="head"><span class="pill">🟡 ALERT 02</span><span class="title">预期失败 → 突然通过</span></div>
+        <div class="desc">说明对应 <strong>bug 可能被开发同学修了</strong></div>
+        <div class="action">→ 自动开 issue 提醒"去掉 test.fail()"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout success" style="margin-top:32px;">
+    <span class="badge">CORE</span><strong>"bug 进基线"的工程化兑现。</strong>ep04 让你标 <code>test.fail()</code>，这套基线机制保证 <strong>"修完不会忘了升级"</strong> —— 比靠人记得检查靠谱 10 倍。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 09</div></div>
+</div>
+</body>
+</html>

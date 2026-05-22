@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · Step 2</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .step-head { display:flex; align-items:center; gap:24px; margin-bottom:32px; }
+  .step-num { font-family:var(--font-mono); font-size:28px; color:var(--primary); font-weight:700; padding:10px 22px; background:rgba(37,99,235,0.14); border:1px solid rgba(37,99,235,0.4); border-radius:10px; letter-spacing:0.1em; }
+  .step-task { font-size:22px; color:var(--ink-3); }
+  pre { font-size:24px; padding:32px 36px; }
+  pre code .cmt { color:var(--ink-4); }
+  pre code .cmd { color:var(--accent); }
+
+  .wizard { margin-top:32px; background:var(--bg-elev); border-radius:14px; overflow:hidden; border:1px solid rgba(148,163,184,0.08); }
+  .wizard-head { padding:18px 28px; background:rgba(15,23,42,0.6); border-bottom:1px solid var(--divider); font-family:var(--font-mono); font-size:18px; color:var(--ink-3); letter-spacing:0.05em; }
+  .wizard table { font-size:22px; }
+  .wizard th { padding:18px 28px; font-size:16px; color:var(--ink-4); }
+  .wizard td { padding:20px 28px; }
+  .wizard td:last-child { font-family:var(--font-mono); color:var(--accent); font-weight:600; }
+
+  .verify { margin-top:32px; display:flex; align-items:center; gap:24px; padding:24px 32px; background:rgba(52,211,153,0.06); border-left:3px solid var(--success); border-radius:4px; font-size:22px; color:var(--ink-2); }
+  .verify .lbl { font-family:var(--font-mono); font-size:16px; color:var(--success); letter-spacing:0.1em; padding:4px 12px; background:rgba(52,211,153,0.16); border-radius:6px; flex-shrink:0; }
+  .verify code { font-size:22px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+
+  <div class="step-head">
+    <div class="step-num">STEP 2 / 4</div>
+    <div class="step-task">初始化 Playwright · 和 demo-app 分目录放</div>
+  </div>
+
+  <pre><code><span class="cmd">cd</span> ..                         <span class="cmt"># 回到项目根</span>
+<span class="cmd">mkdir</span> tests-agents &amp;&amp; <span class="cmd">cd</span> tests-agents
+<span class="cmd">npm init</span> -y
+<span class="cmd">npm init</span> playwright@latest</code></pre>
+
+  <div class="wizard">
+    <div class="wizard-head">向导关键选择</div>
+    <table>
+      <tbody>
+        <tr><td style="color:var(--ink-3);">语言</td><td>TypeScript</td></tr>
+        <tr><td style="color:var(--ink-3);">Test directory</td><td>specs</td></tr>
+        <tr><td style="color:var(--ink-3);">Add GitHub Actions</td><td>false</td></tr>
+        <tr><td style="color:var(--ink-3);">Install browsers</td><td>true</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verify">
+    <span class="lbl">VERIFY</span>
+    <span><code>npx playwright test</code> 看到示例测试 passed = Playwright 装好了</span>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

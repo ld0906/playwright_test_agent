@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 07 · 5 步流程</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .pipeline { margin-top:24px; display:flex; flex-direction:column; gap:12px; }
+  .stage { display:grid; grid-template-columns:80px 1fr 200px 240px; gap:20px; align-items:center; padding:22px 28px; background:var(--bg-elev); border-radius:12px; border:1px solid rgba(148,163,184,0.08); }
+  .stage.review { border-left:4px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+  .stage.ai { border-left:4px solid var(--accent); }
+  .stage.human { border-left:4px solid var(--success); }
+  .stage .num { font-family:var(--font-mono); font-size:28px; font-weight:700; color:var(--accent); text-align:center; }
+  .stage.review .num { color:var(--accent-warm); }
+  .stage .name { font-size:22px; font-weight:600; color:var(--ink-1); line-height:1.4; }
+  .stage .name .sub { display:block; font-size:16px; font-weight:400; color:var(--ink-3); margin-top:4px; }
+  .stage .who { font-family:var(--font-mono); font-size:15px; color:var(--ink-4); letter-spacing:0.05em; }
+  .stage .output { font-family:var(--font-mono); font-size:14px; color:var(--ink-3); background:rgba(15,23,42,0.6); padding:6px 12px; border-radius:6px; }
+  .stage.review .output { background:rgba(251,191,36,0.12); color:var(--accent-warm); }
+
+  .gates { margin-top:24px; padding:24px 32px; background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(96,165,250,0.04)); border:1px solid rgba(251,191,36,0.32); border-left:4px solid var(--accent-warm); border-radius:8px; display:flex; align-items:center; gap:24px; }
+  .gates .num { font-family:var(--font-mono); font-size:48px; font-weight:700; color:var(--accent-warm); line-height:1; flex-shrink:0; }
+  .gates .body { font-size:22px; color:var(--ink-2); line-height:1.5; }
+  .gates .body strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 07</span><span class="sep">/</span><span>完整工作流</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>完整 5 步流程</h2>
+
+  <div class="pipeline">
+    <div class="stage human">
+      <div class="num">01</div>
+      <div class="name">更新 seed.md<span class="sub">只写业务规则变化，不要顺手改 test-plan</span></div>
+      <div class="who">→ 测试负责人</div>
+      <div class="output">seed diff</div>
+    </div>
+    <div class="stage ai">
+      <div class="num">02</div>
+      <div class="name">Planner 增量探索<span class="sub">只针对 seed 新增部分，不重写整份</span></div>
+      <div class="who">→ AI</div>
+      <div class="output">test-plan diff</div>
+    </div>
+    <div class="stage review">
+      <div class="num">03</div>
+      <div class="name">⚠ 人工 review test-plan<span class="sub">最关键最不能省 —— 错的地基写不出对的 spec</span></div>
+      <div class="who">→ 测试工程师</div>
+      <div class="output">approved plan</div>
+    </div>
+    <div class="stage ai">
+      <div class="num">04</div>
+      <div class="name">Generator 生成 spec<span class="sub">7 条强约束的 prompt（ep04）</span></div>
+      <div class="who">→ AI</div>
+      <div class="output">specs/*.spec.ts</div>
+    </div>
+    <div class="stage review">
+      <div class="num">05</div>
+      <div class="name">跑测试 → 红的进 Healer 守门 prompt<span class="sub">真 bug / AI 写错 / 应用真错，分流处理</span></div>
+      <div class="who">→ CI + 测试</div>
+      <div class="output">green</div>
+    </div>
+  </div>
+
+  <div class="gates">
+    <div class="num">×3</div>
+    <div class="body"><strong>5 步里有 3 个 review 关卡</strong>（步 1 / 3 / 5）。任何一步跳过 review 都会出事。</div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

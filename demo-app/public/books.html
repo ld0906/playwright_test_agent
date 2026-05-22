@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>书籍列表 - 迷你书店</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/books.html" class="brand">迷你书店</a>
+    <nav>
+      <a href="/cart.html" id="cart-link">购物车 (<span id="cart-count">0</span>)</a>
+      <span id="welcome"></span>
+      <button id="logout" type="button">退出</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="filters" aria-label="分类筛选">
+      <label for="category">分类</label>
+      <select id="category" name="category">
+        <option value="all">全部</option>
+        <option value="engineering">工程</option>
+        <option value="fiction">小说</option>
+        <option value="psychology">心理</option>
+      </select>
+    </section>
+
+    <ul id="book-list" class="book-grid" aria-label="书籍列表"></ul>
+    <p id="empty-state" class="empty" hidden>这个分类下暂无书籍</p>
+  </main>
+
+  <script src="/app.js"></script>
+  <script>
+    requireLogin();
+    renderTopbar();
+    loadBooks().then(books => {
+      const list = document.getElementById('book-list');
+      const empty = document.getElementById('empty-state');
+      const select = document.getElementById('category');
+
+      function render(category) {
+        const filtered = category === 'all'
+          ? books
+          : books.filter(b => b.category === category);
+        list.innerHTML = filtered.map(bookCard).join('');
+        empty.hidden = filtered.length > 0;
+      }
+
+      select.addEventListener('change', (e) => render(e.target.value));
+      render('all');
+    });
+  </script>
+</body>
+</html>

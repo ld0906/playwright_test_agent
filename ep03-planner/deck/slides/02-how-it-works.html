@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 03 · Planner 怎么工作</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .flow { margin-top:32px; display:grid; grid-template-columns:1fr 160px 1fr 160px 1fr; gap:0; align-items:center; }
+  .node { background:var(--bg-elev); border:1px solid rgba(148,163,184,0.1); border-radius:14px; padding:32px 28px; text-align:center; }
+  .node.input { border-left:4px solid var(--accent); }
+  .node.engine { border-left:4px solid var(--accent-warm); background:rgba(251,191,36,0.05); }
+  .node.output { border-left:4px solid var(--success); background:rgba(52,211,153,0.05); }
+  .node .ttl { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:10px; }
+  .node .name { font-size:24px; font-weight:600; color:var(--ink-1); margin-bottom:10px; }
+  .node .desc { font-size:18px; color:var(--ink-3); line-height:1.5; }
+  .arrow { font-size:48px; color:var(--accent); text-align:center; font-family:var(--font-mono); font-weight:300; }
+  .inputs { display:flex; flex-direction:column; gap:16px; }
+  .key-points { margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .kp { padding:24px 28px; background:rgba(15,23,42,0.5); border-radius:10px; border-top:3px solid var(--accent); }
+  .kp .num { font-family:var(--font-mono); font-size:14px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:8px; }
+  .kp .title { font-size:20px; font-weight:600; color:var(--ink-1); margin-bottom:8px; }
+  .kp .body { font-size:18px; color:var(--ink-3); line-height:1.55; }
+  .kp .body strong { color:var(--ink-2); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 03</span><span class="sep">/</span><span>Planner Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>Planner 是怎么工作的</h2>
+
+  <div class="flow">
+    <div class="inputs">
+      <div class="node input">
+        <div class="ttl">INPUT</div>
+        <div class="name">seed.md</div>
+        <div class="desc">你写给 AI 的业务说明</div>
+      </div>
+      <div class="node input">
+        <div class="ttl">INPUT</div>
+        <div class="name">running app</div>
+        <div class="desc">真正跑起来的应用</div>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node engine">
+      <div class="ttl">ENGINE</div>
+      <div class="name">Planner Agent</div>
+      <div class="desc">LLM + MCP 浏览器工具<br>真去点页面、看 DOM</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node output">
+      <div class="ttl">OUTPUT</div>
+      <div class="name">test-plan.md</div>
+      <div class="desc">结构化的 Markdown<br>测试计划</div>
+    </div>
+  </div>
+
+  <div class="key-points">
+    <div class="kp">
+      <div class="num">POINT · 01</div>
+      <div class="title">不写代码，只写计划</div>
+      <div class="body">生成代码是下一集 Generator 的活</div>
+    </div>
+    <div class="kp">
+      <div class="num">POINT · 02</div>
+      <div class="title">没有 seed 就瞎逛</div>
+      <div class="body">只能发现 <strong>"按钮存在 + 点了有效果"</strong> 这种废话</div>
+    </div>
+    <div class="kp">
+      <div class="num">POINT · 03</div>
+      <div class="title">seed 太多就照抄</div>
+      <div class="body">把具体用例写进 seed = AI 只是粘贴回来</div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>

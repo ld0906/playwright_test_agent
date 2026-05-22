@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>EP 04 · 行动</title><link rel="stylesheet" href="../shared/tokens.css"></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 04</span><span class="sep">/</span><span>Generator Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>本集行动</h2>
+
+  <div class="action-wrap">
+    <div>
+      <div class="action-intro">五件事打勾就过关：</div>
+      <div class="check-list">
+        <div class="check-item"><div class="check-box"></div><div class="check-text">骨架就位<span class="meta">playwright.config.ts + fixtures/auth.ts</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">Generator prompt 跑通<span class="meta">specs/ 下生成 5 个文件</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">检查脚本没有偷工减料<span class="meta">没 <code>waitForTimeout</code>、没 CSS 长路径、断言有业务</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">npx playwright test 跑过一次<span class="meta">RISK-02/03 是 expected-fail，不是真红</span></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text"><span style="color:var(--accent-warm);">★</span> 隐藏 bug 进基线<span class="meta">risks.spec.ts 用 <code>test.fail()</code> 标记 + 引用 ISSUE-001</span></div></div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="next-card">
+        <div class="next-label">NEXT · 第 5 集</div>
+        <div class="next-title">审查 AI 生成的脚本<br>三关心法</div>
+        <div class="next-desc">逐条审 Generator 写的 spec，找出 AI 偷工减料的地方 —— <strong style="color:var(--ink-1);">不审就进 CI 比手写还危险</strong>。</div>
+      </div>
+
+      <div class="quote-card">
+        <div class="quote-label">REMEMBER</div>
+        <div class="quote-text">第一次跑就 100% 全绿 <em>反而要警惕</em> ——<br>很可能 AI 把断言写软了。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">08 / 08</div></div>
+</div>
+</body>
+</html>

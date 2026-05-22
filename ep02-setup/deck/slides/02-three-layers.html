@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>EP 02 · 三层架构</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .stack { margin-top:16px; display:flex; flex-direction:column; gap:24px; }
+  .layer { background:var(--bg-elev); border-radius:16px; padding:36px 48px; border:1px solid rgba(148,163,184,0.1); display:grid; grid-template-columns:200px 380px 1fr 200px; gap:32px; align-items:center; position:relative; }
+  .layer .level { font-family:var(--font-mono); font-size:18px; color:var(--ink-4); letter-spacing:0.15em; }
+  .layer .name { font-size:32px; font-weight:600; color:var(--ink-1); }
+  .layer .tech { font-family:var(--font-mono); font-size:22px; color:var(--accent); }
+  .layer .desc { font-size:22px; color:var(--ink-2); line-height:1.5; }
+  .layer.app    { border-left:4px solid #34D399; }
+  .layer.test   { border-left:4px solid var(--accent); }
+  .layer.agent  { border-left:4px solid var(--accent-warm); }
+  .connector { display:flex; justify-content:center; padding:4px 0; }
+  .connector::before { content:""; width:2px; height:24px; background:var(--divider); }
+  .footnote { margin-top:48px; padding:24px 32px; background:rgba(37,99,235,0.06); border-left:3px solid var(--primary); border-radius:4px; font-size:24px; color:var(--ink-2); line-height:1.6; }
+  .footnote strong { color:var(--ink-1); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 02</span><span class="sep">/</span><span>环境搭建</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>我们要装的三层</h2>
+
+  <div class="stack">
+    <div class="layer agent">
+      <div class="level">LAYER · 03</div>
+      <div class="name">代理层</div>
+      <div class="desc">AI 通过 MCP 协议拿到操作浏览器的能力</div>
+      <div class="tech">Claude Code</div>
+    </div>
+    <div class="connector"></div>
+    <div class="layer test">
+      <div class="level">LAYER · 02</div>
+      <div class="name">测试层</div>
+      <div class="desc">浏览器自动化框架 + 把"操作浏览器"暴露成 MCP server</div>
+      <div class="tech">Playwright<br>+ @playwright/mcp</div>
+    </div>
+    <div class="connector"></div>
+    <div class="layer app">
+      <div class="level">LAYER · 01</div>
+      <div class="name">应用层</div>
+      <div class="desc">被测对象，整门课不变</div>
+      <div class="tech">mini-bookstore</div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    三层<strong>缺一不可</strong>。下面我们一层一层装。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>

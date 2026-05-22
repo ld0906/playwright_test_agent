@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 04 · 4 条硬约束</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .rules { margin-top:16px; display:flex; flex-direction:column; gap:16px; }
+  .rule { display:grid; grid-template-columns:90px 1fr 1fr; gap:24px; align-items:center; padding:24px 28px; background:var(--bg-elev); border-radius:12px; border:1px solid rgba(148,163,184,0.08); border-left:4px solid var(--accent); }
+  .rule .num { font-family:var(--font-mono); font-size:38px; font-weight:700; color:var(--accent); text-align:center; }
+  .rule .ttl { font-size:24px; font-weight:600; color:var(--ink-1); line-height:1.35; }
+  .rule .ttl .sub { display:block; font-size:18px; font-weight:400; color:var(--ink-3); margin-top:6px; line-height:1.5; }
+  .rule .ttl .sub code { color:var(--accent); font-size:16px; }
+  .rule .bad { font-family:var(--font-mono); font-size:18px; color:var(--danger); background:rgba(248,113,113,0.08); padding:14px 18px; border-radius:8px; border-left:3px solid var(--danger); line-height:1.4; }
+  .rule .bad::before { content:"✗ "; font-weight:700; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 04</span><span class="sep">/</span><span>Generator Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>好脚本的 4 条硬约束</h2>
+
+  <div class="rules">
+    <div class="rule">
+      <div class="num">01</div>
+      <div class="ttl">user-facing locator<span class="sub">只用 <code>getByRole / getByLabel / getByText / getByPlaceholder</code></span></div>
+      <div class="bad">page.locator('div:nth-child(3) > button')</div>
+    </div>
+    <div class="rule">
+      <div class="num">02</div>
+      <div class="ttl">禁 waitForTimeout<span class="sub">等待用 web-first assertion，让 Playwright 自动等</span></div>
+      <div class="bad">await page.waitForTimeout(3000)</div>
+    </div>
+    <div class="rule">
+      <div class="num">03</div>
+      <div class="ttl">断言验证业务状态<span class="sub">不允许只 <code>toBeVisible()</code> 就完事</span></div>
+      <div class="bad">await expect(page).toBeTruthy()</div>
+    </div>
+    <div class="rule">
+      <div class="num">04</div>
+      <div class="ttl">公共动作抽 fixture<span class="sub">登录、构造购物车等不能在每个 spec 里重复</span></div>
+      <div class="bad">每个 spec 都贴一遍登录代码</div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:24px;">
+    <span class="badge">RULE</span>这 4 条<strong>直接写进 Generator 的 prompt</strong>。少哪条，后面就要替 AI 擦哪条屁股。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">03 / 08</div></div>
+</div>
+</body>
+</html>

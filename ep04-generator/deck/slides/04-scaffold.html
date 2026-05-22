@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 04 · 项目骨架</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .scaffold { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+  pre { font-size:18px; padding:24px 28px; line-height:1.5; }
+  .reason { margin-top:32px; padding:24px 28px; background:rgba(37,99,235,0.06); border-left:3px solid var(--primary); border-radius:4px; }
+  .reason .ttl { font-size:18px; color:var(--accent); font-family:var(--font-mono); letter-spacing:0.1em; margin-bottom:10px; }
+  .reason .body { font-size:22px; color:var(--ink-2); line-height:1.55; }
+  .reason .body strong { color:var(--ink-1); }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 04</span><span class="sep">/</span><span>Generator Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>项目骨架 · 先把地基铺好</h2>
+
+  <div class="scaffold">
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">TS</span>
+        <span class="path">tests-agents/playwright.config.ts</span>
+        <span class="meta">baseURL + trace</span>
+      </div>
+      <pre><code><span class="k">import</span> { defineConfig } <span class="k">from</span> <span class="s">'@playwright/test'</span>;
+
+<span class="k">export default</span> defineConfig({
+  testDir: <span class="s">'./specs'</span>,
+  use: {
+    baseURL: <span class="s">'http://localhost:5173'</span>,
+    trace: <span class="s">'retain-on-failure'</span>,
+    screenshot: <span class="s">'only-on-failure'</span>,
+  },
+});</code></pre>
+    </div>
+
+    <div class="file-card">
+      <div class="file-head">
+        <span class="pill">TS</span>
+        <span class="path">tests-agents/fixtures/auth.ts</span>
+        <span class="meta">复用登录</span>
+      </div>
+      <pre><code><span class="cmt">// 走 localStorage 旁路登录</span>
+<span class="cmt">// UI 登录在 auth.spec.ts 专测</span>
+<span class="k">export const</span> test = base.extend({
+  loggedIn: <span class="k">async</span> ({ page }, use) =&gt; {
+    <span class="k">await</span> page.goto(<span class="s">'/login.html'</span>);
+    <span class="k">await</span> page.evaluate(() =&gt;
+      localStorage.setItem(<span class="s">'user'</span>, <span class="s">'alice'</span>));
+    <span class="k">await</span> page.goto(<span class="s">'/books.html'</span>);
+    <span class="k">await</span> use(page);
+  },
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="reason">
+    <div class="ttl">WHY · 为什么先铺骨架</div>
+    <div class="body">不建骨架，Generator 会<strong>自己拍脑袋决定文件结构</strong>，你后面整理半天。先铺好，AI 写出来的代码自动"长得像你团队"。</div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

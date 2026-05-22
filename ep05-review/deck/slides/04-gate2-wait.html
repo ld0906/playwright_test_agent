@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · 第 2 关 等待</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .gate-head { margin-bottom:32px; display:flex; align-items:baseline; gap:24px; }
+  .gate-num { font-family:var(--font-mono); font-size:80px; font-weight:700; color:var(--accent); line-height:0.9; }
+  .gate-name { font-size:48px; font-weight:700; color:var(--ink-1); }
+  .gate-tag { font-size:22px; color:var(--ink-3); margin-left:auto; padding:8px 18px; background:rgba(96,165,250,0.12); border-radius:8px; font-family:var(--font-mono); letter-spacing:0.05em; }
+
+  .anti { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:32px; }
+  .anti .item { background:var(--bg-elev); border:1px solid rgba(248,113,113,0.24); border-left:4px solid var(--danger); border-radius:12px; padding:24px 26px; }
+  .anti .item .badge { display:inline-block; font-family:var(--font-mono); font-size:13px; background:rgba(248,113,113,0.18); color:var(--danger); padding:4px 10px; border-radius:5px; letter-spacing:0.1em; margin-bottom:14px; }
+  .anti .item code { display:block; font-family:var(--font-mono); font-size:18px; color:var(--ink-1); padding:12px 14px; background:rgba(15,23,42,0.6); border-radius:8px; margin-bottom:12px; }
+  .anti .item .reason { font-size:16px; color:var(--ink-3); line-height:1.5; }
+
+  pre { font-size:20px; padding:24px 28px; }
+
+  .ban { margin-top:32px; padding:24px 32px; background:rgba(248,113,113,0.06); border-left:4px solid var(--danger); border-radius:8px; display:flex; align-items:center; gap:24px; }
+  .ban .icon { width:48px; height:48px; background:var(--danger); color:#0F172A; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:700; font-family:var(--font-mono); flex-shrink:0; }
+  .ban .body { font-size:24px; color:var(--ink-1); line-height:1.5; font-weight:500; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+
+  <div class="gate-head">
+    <span class="gate-num">02</span>
+    <span class="gate-name">等待方式</span>
+    <span class="gate-tag">5 项检查</span>
+  </div>
+
+  <div class="anti">
+    <div class="item">
+      <div class="badge">ANTI · 01</div>
+      <code>await page.waitForTimeout(3000)</code>
+      <div class="reason">硬等 3 秒。机器快了浪费，慢了不够 —— 永远不对。</div>
+    </div>
+    <div class="item">
+      <div class="badge">ANTI · 02</div>
+      <code>waitForLoadState('networkidle')</code>
+      <div class="reason">现代应用一堆心跳/轮询接口，基本不会触发，要么超时要么死等。</div>
+    </div>
+    <div class="item">
+      <div class="badge">ANTI · 03</div>
+      <code>if (await el.isVisible()) ...</code>
+      <div class="reason">把"等待"变成"瞬间快照"。元素晚 100ms 出现就走 else 分支。</div>
+    </div>
+  </div>
+
+  <div class="file-card">
+    <div class="file-head">
+      <span class="pill" style="background:rgba(52,211,153,0.16); color:var(--success);">✓ FIX</span>
+      <span class="path">替代方案 · web-first assertion</span>
+      <span class="meta">Playwright 自带轮询等待</span>
+    </div>
+    <pre><code>await expect(page.<span class="cmd">getByText</span>(<span class="s">'已加入购物车'</span>)).toBeVisible();
+await expect(page).<span class="cmd">toHaveURL</span>(/\/books\.html/);
+await expect(page.<span class="cmd">locator</span>(<span class="s">'#cart-count'</span>)).toHaveText(<span class="s">'1'</span>);</code></pre>
+  </div>
+
+  <div class="ban">
+    <div class="icon">⊘</div>
+    <div class="body"><strong>团队规矩：waitForTimeout 出现一次就 reject PR。</strong>没得商量。</div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">04 / 08</div></div>
+</div>
+</body>
+</html>

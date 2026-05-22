@@ -1,0 +1,20 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "迷你书店" [ref=e3] [cursor=pointer]:
+      - /url: /books.html
+    - navigation [ref=e4]:
+      - link "购物车 (0)" [ref=e5] [cursor=pointer]:
+        - /url: /cart.html
+      - generic [ref=e6]: 你好，alice
+      - button "退出" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - article [ref=e9]:
+      - generic [ref=e10]: 📕
+      - generic [ref=e11]:
+        - heading "设计模式：可复用面向对象软件的基础" [level=1] [ref=e12]
+        - paragraph [ref=e13]: 作者：GoF
+        - paragraph [ref=e14]: ¥99
+        - paragraph [ref=e15]: ⚠️ 已下架
+        - paragraph [ref=e16]: 经典 23 种设计模式集合。
+        - paragraph [ref=e17]: 库存：0
+        - button "加入购物车" [ref=e18] [cursor=pointer]

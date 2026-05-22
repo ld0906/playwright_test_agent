@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 04 · Generator 怎么工作</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .flow { margin-top:24px; display:grid; grid-template-columns:280px 100px 1fr 100px 1fr; gap:24px; align-items:center; }
+  .inputs { display:flex; flex-direction:column; gap:12px; }
+  .node { background:var(--bg-elev); border:1px solid rgba(148,163,184,0.1); border-radius:14px; padding:24px 24px; }
+  .node .ttl { font-family:var(--font-mono); font-size:13px; color:var(--ink-4); letter-spacing:0.1em; margin-bottom:6px; }
+  .node .name { font-size:21px; font-weight:600; color:var(--ink-1); margin-bottom:6px; }
+  .node .desc { font-size:16px; color:var(--ink-3); line-height:1.4; }
+  .node.input { border-left:3px solid var(--accent); }
+  .node.engine { border-left:4px solid var(--accent-warm); background:rgba(251,191,36,0.05); text-align:center; padding:32px 24px; }
+  .node.output { border-left:3px solid var(--success); background:rgba(52,211,153,0.05); text-align:center; padding:32px 24px; }
+  .arrow { text-align:center; font-size:36px; color:var(--accent); font-family:var(--font-mono); }
+  .crit { margin-top:48px; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 04</span><span class="sep">/</span><span>Generator Agent</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>Generator 是怎么工作的</h2>
+
+  <div class="flow">
+    <div class="inputs">
+      <div class="node input"><div class="ttl">INPUT 01</div><div class="name">test-plan.md</div><div class="desc">上一集 Planner 的产出</div></div>
+      <div class="node input"><div class="ttl">INPUT 02</div><div class="name">seed.md</div><div class="desc">业务规则参考</div></div>
+      <div class="node input"><div class="ttl">INPUT 03</div><div class="name">项目骨架</div><div class="desc">playwright.config + fixtures</div></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node engine">
+      <div class="ttl">ENGINE</div>
+      <div class="name">Generator Agent</div>
+      <div class="desc" style="margin-top:14px; line-height:1.55;">边写 spec 边在浏览器里<br><strong style="color:var(--ink-1);">"对答案"</strong>拿 locator</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node output">
+      <div class="ttl">OUTPUT</div>
+      <div class="name">specs/*.spec.ts</div>
+      <div class="desc" style="margin-top:14px; line-height:1.55;">可运行的 Playwright<br>TypeScript spec</div>
+    </div>
+  </div>
+
+  <div class="callout danger crit">
+    <span class="badge">⚠</span><strong>Generator 默认风格不一定符合你团队。</strong>不写约束 = 你赌 AI 默认正确。下一页 4 条强约束。
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>

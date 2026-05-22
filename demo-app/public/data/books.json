@@ -1,0 +1,112 @@
+[
+  {
+    "id": "b001",
+    "title": "重构：改善既有代码的设计",
+    "author": "Martin Fowler",
+    "category": "engineering",
+    "price": 89,
+    "stock": 12,
+    "discontinued": false,
+    "cover": "📘",
+    "summary": "经典软件工程书籍，讲解如何在不改变外部行为的前提下改善代码结构。"
+  },
+  {
+    "id": "b002",
+    "title": "代码整洁之道",
+    "author": "Robert C. Martin",
+    "category": "engineering",
+    "price": 79,
+    "stock": 8,
+    "discontinued": false,
+    "cover": "📗",
+    "summary": "讲解如何写出可读、可维护的代码。"
+  },
+  {
+    "id": "b003",
+    "title": "设计模式：可复用面向对象软件的基础",
+    "author": "GoF",
+    "category": "engineering",
+    "price": 99,
+    "stock": 0,
+    "discontinued": true,
+    "cover": "📕",
+    "summary": "经典 23 种设计模式集合。"
+  },
+  {
+    "id": "b004",
+    "title": "深入理解计算机系统",
+    "author": "Randal E. Bryant",
+    "category": "engineering",
+    "price": 139,
+    "stock": 5,
+    "discontinued": false,
+    "cover": "📙",
+    "summary": "系统级编程经典教材。"
+  },
+  {
+    "id": "b005",
+    "title": "活着",
+    "author": "余华",
+    "category": "fiction",
+    "price": 35,
+    "stock": 20,
+    "discontinued": false,
+    "cover": "📔",
+    "summary": "讲述一个普通中国农民一生的故事。"
+  },
+  {
+    "id": "b006",
+    "title": "百年孤独",
+    "author": "马尔克斯",
+    "category": "fiction",
+    "price": 55,
+    "stock": 15,
+    "discontinued": false,
+    "cover": "📓",
+    "summary": "魔幻现实主义经典，布恩迪亚家族七代人的故事。"
+  },
+  {
+    "id": "b007",
+    "title": "三体（绝版纪念版）",
+    "author": "刘慈欣",
+    "category": "fiction",
+    "price": 199,
+    "stock": 0,
+    "discontinued": true,
+    "cover": "📒",
+    "summary": "硬科幻经典三部曲合集，已停止发行。"
+  },
+  {
+    "id": "b008",
+    "title": "心理学与生活",
+    "author": "Richard J. Gerrig",
+    "category": "psychology",
+    "price": 88,
+    "stock": 10,
+    "discontinued": false,
+    "cover": "📚",
+    "summary": "斯坦福大学心理学入门教材。"
+  },
+  {
+    "id": "b009",
+    "title": "影响力",
+    "author": "Robert B. Cialdini",
+    "category": "psychology",
+    "price": 49,
+    "stock": 18,
+    "discontinued": false,
+    "cover": "📖",
+    "summary": "讲解 6 种影响力武器。"
+  },
+  {
+    "id": "b010",
+    "title": "思考，快与慢",
+    "author": "Daniel Kahneman",
+    "category": "psychology",
+    "price": 69,
+    "stock": 7,
+    "discontinued": false,
+    "cover": "📑",
+    "summary": "诺贝尔经济学奖得主讲快思考和慢思考。"
+  }
+]

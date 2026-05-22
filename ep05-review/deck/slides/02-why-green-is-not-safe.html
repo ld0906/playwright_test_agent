@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><title>EP 05 · 为什么绿了也不能信</title><link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .habits { margin-top:24px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .habit { background:var(--bg-elev); border:1px solid rgba(248,113,113,0.16); border-radius:14px; padding:32px 28px; border-left:4px solid var(--danger); }
+  .habit .num { font-family:var(--font-mono); font-size:14px; color:var(--danger); letter-spacing:0.1em; margin-bottom:10px; }
+  .habit .ttl { font-size:24px; font-weight:600; color:var(--ink-1); margin-bottom:14px; }
+  .habit .why { font-size:18px; color:var(--ink-3); line-height:1.55; }
+  .habit .why .ex { color:var(--accent); font-family:var(--font-mono); font-size:16px; }
+  .big-quote { margin-top:48px; padding:36px 48px; background:linear-gradient(135deg, rgba(248,113,113,0.12), rgba(251,191,36,0.06)); border:1px solid rgba(248,113,113,0.32); border-left:4px solid var(--danger); border-radius:12px; }
+  .big-quote .lbl { font-family:var(--font-mono); font-size:14px; color:var(--danger); letter-spacing:0.15em; margin-bottom:14px; }
+  .big-quote .text { font-size:30px; line-height:1.5; color:var(--ink-1); font-weight:500; }
+  .big-quote .text em { color:var(--accent-warm); font-style:normal; }
+</style></head>
+<body>
+<div class="slide">
+  <div class="chrome-top"><span class="ep-num">EP 05</span><span class="sep">/</span><span>审查三关</span></div>
+  <h2 class="h-content"><span class="accent-line"></span>AI 写脚本的 3 个偷工减料习惯</h2>
+
+  <div class="habits">
+    <div class="habit">
+      <div class="num">HABIT · 01</div>
+      <div class="ttl">能不学就不学</div>
+      <div class="why">直接抓 <span class="ex">div:nth-child(3)</span> 比研究 ARIA 容易</div>
+    </div>
+    <div class="habit">
+      <div class="num">HABIT · 02</div>
+      <div class="ttl">能 sleep 就 sleep</div>
+      <div class="why"><span class="ex">waitForTimeout(3000)</span> 比写 web-first assertion 容易</div>
+    </div>
+    <div class="habit">
+      <div class="num">HABIT · 03</div>
+      <div class="ttl">能浅就浅</div>
+      <div class="why"><span class="ex">toBeVisible()</span> 比断业务状态容易</div>
+    </div>
+  </div>
+
+  <div class="big-quote">
+    <div class="lbl">CORE QUOTE</div>
+    <div class="text">AI 不是不会写好脚本，是好脚本要求它 <em>"多想一步"</em> ——<br>它<em>默认不会</em>。review 就是给它"补动机"。</div>
+  </div>
+
+  <div class="chrome-bottom"><div class="brand"><span class="brand-dot"></span><span>测试论道 · Playwright Test Agents 实战课</span></div><div class="page-num">02 / 08</div></div>
+</div>
+</body>
+</html>
