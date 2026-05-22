@@ -50,44 +50,7 @@ playwright-test-agents-course/
 ├── README.md
 ├── demo-app/                     学员动手对象（迷你书店）
 ├── ep01-what-are-test-agents/    每集一个文件夹
-│   ├── slides.md                 PPT 大纲
-│   ├── script.md                 录播稿
-│   └── handout.md                学员行动卡
 ├── ep02-setup/
-│   ├── slides.md / script.md / handout.md
 │   └── code/                     可跑配置 / 脚本
 ...
 ```
-
-## 销售页文案
-
-**标题**：Playwright Test Agents 实战：让 AI 自己探索 UI
-
-**副标题**：8 集，把 Playwright 官方 AI 测试代理从概念变成你团队 CI 里能跑的回归资产。
-
-**课程介绍**：
-
-Playwright 在 2025 年推出了 Test Agents——三个互相配合的 AI 代理，分别负责探索（Planner）、生成（Generator）、自愈（Healer）。
-
-但官方文档只告诉你"它能做什么"，没告诉你：
-
-- 怎么写好 seed 让 Planner 不瞎逛？
-- Generator 生成的脚本怎么 review 才不会进 CI 后就挂？
-- Healer 自愈出来的脚本是"修对了"还是"绕过去"了？
-- 三个 agent 怎么串成一条工作流？
-- 什么场景根本不该用 Test Agents？
-
-这门课用一个完整可跑的迷你书店应用，带你从环境搭建走到 CI 接入。每集都有可动手的产物，不堆概念。
-
-**学完你能**：
-
-- 在自己项目里跑通 Playwright Test Agents
-- 写出让 AI 不瞎逛的 seed 文档
-- 用 review 清单审查 AI 生成的脚本
-- 设计能自愈但不会"修错"的回归流程
-- 把整套流程接入 GitHub Actions
-
-**一句话总结**：
-
-让 AI 帮你写脚本只是入门，让 AI 写出来的脚本能进 CI 才是工程。
-# playwright_test_agent
