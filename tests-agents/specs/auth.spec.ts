@@ -10,6 +10,7 @@ test.describe('模块一 · 登录', () => {
   test('LOGIN-01 [P0] 正确账号登录成功，跳转列表页并显示欢迎语', async ({ page }) => {
     await page.goto('/login.html');
     await page.getByLabel('用户名').fill('alice');
+    // await page.locator('[name="username"]').fill('alice');  
     await page.getByLabel('密码').fill('password');
     await page.getByRole('button', { name: '登录' }).click();
 
