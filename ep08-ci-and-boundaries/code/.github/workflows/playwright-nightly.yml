@@ -13,6 +13,10 @@ on:
     - cron: '0 18 * * *'    # UTC 18:00 = 北京时间 02:00
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write          # Notify 步骤要建 issue，默认 token 可能只读
+
 jobs:
   full-regression:
     runs-on: ubuntu-latest
@@ -40,11 +44,16 @@ jobs:
           npx wait-on http://localhost:5173 -t 30000
 
       - name: Run all tests (JSON reporter)
-        run: npx playwright test --reporter=json --output=results.json
+        # --reporter=json 默认写 stdout；要落地成文件必须用 PLAYWRIGHT_JSON_OUTPUT_NAME。
+        # （旧写法 --output=results.json 实际是 artifacts 目录，不会生成报告文件。）
+        run: npx playwright test --reporter=json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
         continue-on-error: true
 
       - name: Diff against baseline
-        run: node ../ep08-ci-and-boundaries/code/scripts/diff-baseline.js results.json baseline.json
+        # baseline.json 在 ep08 目录，不在 tests-agents，需用相对路径指过去。
+        run: node ../ep08-ci-and-boundaries/code/scripts/diff-baseline.js results.json ../ep08-ci-and-boundaries/code/baseline.json
 
       - name: Notify if RISK-* unexpectedly passed
         if: failure()

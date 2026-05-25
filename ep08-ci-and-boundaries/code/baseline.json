@@ -1,5 +1,6 @@
 {
-  "_README": "用例 → 预期状态。test.fail() 标记的用例填 'failed'。新通过用例不用写（默认 'passed'）。",
-  "风险用例 · 业务规则边界 > RISK-02 [P0] 已下架书不应能加入购物车": "failed",
-  "风险用例 · 业务规则边界 > RISK-03 [P0] 库存为 0 的书不应能加入购物车": "failed"
+  "_README": "用例 → 预期状态。test.fail() 标记的用例填 'failed'，其余默认 'passed' 不用写。ID 格式 = <文件名> > <describe 标题> > <test 标题>，与 Playwright JSON reporter 输出严格一致。",
+  "risks.spec.ts > 风险用例 > RISK-02 [P0] 已下架/库存为0的书必须禁止加入购物车": "failed",
+  "risks.spec.ts > 风险用例 > RISK-03 [P1] 购物车数量不得超过库存上限": "failed",
+  "risks.spec.ts > 风险用例 > RISK-04 [P1] 纯空白字符不得绕过姓名/地址校验": "failed"
 }
